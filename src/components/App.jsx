@@ -1,11 +1,11 @@
 import React from "react";
 import Register from "./Register.jsx"
-import Selection from "./Selection.jsx"
+import Home from "./Home.jsx"
 
 function App(){
     return (
         <div>
-            <Selection />
+            <Home />
         </div>
     )
 }

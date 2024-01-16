@@ -1,5 +1,5 @@
 import React from "react";
-import Selection from "./Selection.jsx";
+import Selection from "./Home.jsx";
 
 function Register(props){
     return  (
@@ -23,7 +23,7 @@ function Register(props){
                 <div className="col-md-6 mb-4 d-flex align-items-center">
                     <div className="form-outline datepicker w-100">
                     <input type="text" className="form-control form-control-lg" id="birthdayDate" />
-                    <label htmlFor="birthdayDate" className="form-label">Birthday</label>
+                    <label htmlFor="birthdayDate" className="form-label">Password</label>
                     </div>
                 </div>
                 <div className="col-md-6 mb-4">

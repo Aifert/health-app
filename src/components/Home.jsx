@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import Register from "./Register";
 import Login from './Login';
 
-function Selection(){
+function Home(){
 
     const [isClicked, updateisClicked] = useState(true);
 
@@ -28,7 +28,7 @@ function Selection(){
                     show = {!isClicked}
                     />
                     <Login 
-                    show = {!isClicked}
+                    show = {isClicked}
                     />
                   </div>
                 </div>
@@ -42,4 +42,4 @@ function Selection(){
     )
 }
 
-export default Selection
+export default Home
