@@ -1,45 +1,41 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import Register from "./Register";
-import Login from './Login';
-import {createClient} from 'pexels';
+import Login from "./Login";
 
-function Home(){
+function Home() {
+  const [isClicked, updateisClicked] = useState(true);
+  const [photoURL, setPhotoURL] = useState("LMAO");
 
-    const [isClicked, updateisClicked] = useState(true);
+  function handleonClick() {
+    updateisClicked(!isClicked);
+  }
 
-    function handleonClick(){
-        updateisClicked(!isClicked)
+  async function fetchData() {
+    try {
+      const response = await fetch("http://localhost:4000/wallpaper");
+      const data = await response.json();
+
+      const newPhotoURL = `https://images.pexels.com/photos/${data.photoID}/pexels-photo-${data.photoID}.jpeg`;
+      setPhotoURL(newPhotoURL);
+
+      console.log(newPhotoURL); // This will log the updated state
+    } catch (error) {
+      console.error("Error fetching photos", error);
     }
+  }
 
-    const [photoURL, setPhotoURL] = useState("");
+  useEffect(() => {
+    fetchData();
+  }, []);
 
-    useEffect(() => {
-        const client = createClient("")
-        const query = "Switzerland"
-
-        client.photos.search({
-            query,
-            per_page : 1
-        })
-        .then(response => {
-            setPhotoURL(`https://images.pexels.com/photos/${response.photos[0].id}/pexels-photo-${response.photos[0].id}.jpeg`,)
-            console.log(photoURL);
-        })
-        .catch(error => {
-            console.error("Error fetching photos", error);
-        })
-    }, []);
-
-    const componentStyle = {
-      backgroundImage: `url(${photoURL})`,
-      backgroundSize: 'cover',
-      backgroundPosition: 'center', // Adjust as needed
-      width: '100%',
-      height: '100vh',
-    };
+  const componentStyle = {
+    backgroundImage: `url(${photoURL})`,
+    backgroundSize: "cover",
+    backgroundPosition: "center", // Adjust as needed
+    width: "100%",
+    height: "100vh",
+  };
     
-    
-
     return (
         <div className="Home">
         <div>
