@@ -12,9 +12,9 @@ app.use(cors());
 const client = createClient(process.env.APIKEY);
 
 
-app.get("/wallpaper", (req, res) => {
+app.get("/wallpaper/:country", (req, res) => {
     try{
-        const query = "Switzerland";
+        const query = req.params.country;
 
         client.photos.search({
             query,
@@ -31,6 +31,7 @@ app.get("/wallpaper", (req, res) => {
     }
     catch(err){
         console.log("Error fetching wallpaper");
+        res.status(500).json({ error: "Internal Server Error" });
     }
 })
 

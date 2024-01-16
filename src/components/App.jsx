@@ -6,7 +6,7 @@ import LandingPage from "./LandingPage.jsx"
 function App(){
     return (
         <div>
-            <Home />
+            <LandingPage />
         </div>
     )
 }

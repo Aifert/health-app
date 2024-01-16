@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
 import Register from "./Register";
 import Login from "./Login";
+import LandingPage from "./LandingPage"
 
-function Home() {
+function Home(props) {
   const [isClicked, updateisClicked] = useState(true);
   const [photoURL, setPhotoURL] = useState("LMAO");
+  const [error, setError] = useState(false);
 
   function handleonClick() {
     updateisClicked(!isClicked);
@@ -12,14 +14,16 @@ function Home() {
 
   async function fetchData() {
     try {
-      const response = await fetch("http://localhost:4000/wallpaper");
+      const response = await fetch(`http://localhost:4000/wallpaper/${props.Country}`);
       const data = await response.json();
 
       const newPhotoURL = `https://images.pexels.com/photos/${data.photoID}/pexels-photo-${data.photoID}.jpeg`;
       setPhotoURL(newPhotoURL);
+      setError(false);
 
       console.log(newPhotoURL); // This will log the updated state
     } catch (error) {
+      setError(true);
       console.error("Error fetching photos", error);
     }
   }
@@ -37,6 +41,7 @@ function Home() {
   };
     
     return (
+        !error ? 
         <div className="Home">
         <div>
         <section className="vh-100 gradient-custom" style = {componentStyle}>
@@ -64,7 +69,10 @@ function Home() {
         </section>
         </div>
         </div>
-
+        :
+        <LandingPage
+        Error ={error}
+         /> 
     )
 }
 
