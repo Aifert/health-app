@@ -22,7 +22,7 @@ function Register(props){
                 <div className="col-md-6 mb-4 d-flex align-items-center">
                     <div className="form-outline datepicker w-100">
                     <input type="text" className="form-control form-control-lg" id="birthdayDate" />
-                    <label htmlFor="birthdayDate" className="form-label">Password</label>
+                    <label htmlFor="birthdayDate" className="form-label">Email</label>
                     </div>
                 </div>
                 <div className="col-md-6 mb-4">
@@ -45,13 +45,13 @@ function Register(props){
                 <div className="col-md-6 mb-4 pb-2">
                     <div className="form-outline">
                     <input type="email" id="emailAddress" className="form-control form-control-lg" />
-                    <label className="form-label" htmlFor="emailAddress">Email</label>
+                    <label className="form-label" htmlFor="emailAddress">Password</label>
                     </div>
                 </div>
                 <div className="col-md-6 mb-4 pb-2">
                     <div className="form-outline">
                     <input type="tel" id="phoneNumber" className="form-control form-control-lg" />
-                    <label className="form-label" htmlFor="phoneNumber">Phone Number</label>
+                    <label className="form-label" htmlFor="phoneNumber">Repeat Password</label>
                     </div>
                 </div>
                 </div>
