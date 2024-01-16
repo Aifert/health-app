@@ -1,5 +1,4 @@
 import React from "react";
-import Selection from "./Home.jsx";
 
 function Register(props){
     return  (
