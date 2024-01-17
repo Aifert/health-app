@@ -13,18 +13,20 @@ function Home(props) {
   }
 
   async function fetchData() {
-    try {
-      const response = await fetch(`http://localhost:4000/wallpaper/${props.Country}`);
-      const data = await response.json();
+    if(photoURL === "LMAO"){
+      try {
+        const response = await fetch(`http://localhost:4000/wallpaper/${props.Country}`);
+        const data = await response.json();
 
-      const newPhotoURL = `https://images.pexels.com/photos/${data.photoID}/pexels-photo-${data.photoID}.jpeg`;
-      setPhotoURL(newPhotoURL);
-      setError(false);
+        const newPhotoURL = `https://images.pexels.com/photos/${data.photoID}/pexels-photo-${data.photoID}.jpeg`;
+        setPhotoURL(newPhotoURL);
+        setError(false);
 
-      console.log(newPhotoURL); // This will log the updated state
-    } catch (error) {
-      setError(true);
-      console.error("Error fetching photos", error);
+        console.log(newPhotoURL); // This will log the updated state
+      } catch (error) {
+        setError(true);
+        console.error("Error fetching photos", error);
+      }      
     }
   }
 
@@ -50,10 +52,18 @@ function Home(props) {
               <div className="col-12 col-lg-9 col-xl-7">
                 <div className="card shadow-2-strong card-registration" style={{ borderRadius: '15px' }}>
                   <div className="card-body p-4 p-md-5">
-                    <div class = "selectionbuttons">
-                        <button onClick = {handleonClick}>Login</button>
-                        <button onClick = {handleonClick}>Register</button>
+                  <div className="row">
+                <div className="col-md-6 mb-4">
+                    <div className="form-outline selectionbuttons">
+                    <button onClick = {handleonClick} className = "login-register p-3">Login</button>
                     </div>
+                </div>
+                <div className="col-md-6 mb-4">
+                    <div className="form-outline selectionbuttons">
+                    <button onClick = {handleonClick} className = "login-register p-3">Register</button>
+                    </div>
+                </div>
+                </div>
                     <hr />
                     <Register 
                     show = {!isClicked}

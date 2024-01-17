@@ -18,11 +18,13 @@ app.get("/wallpaper/:country", (req, res) => {
 
         client.photos.search({
             query,
-            per_page : 1
+            per_page : 100
         })
         .then(
             response => {
-                const id = response.photos[0].id;
+                var number = Math.floor(Math.random() * 100)
+                console.log("Fetched");
+                const id = response.photos[number].id;
                 res.json({
                     photoID : id
                 })

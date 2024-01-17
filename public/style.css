@@ -18,3 +18,28 @@
     .card-registration .select-arrow {
     top: 13px;
     }
+
+
+.label {
+    display : flex;
+    justify-content: center;
+}
+
+#landing-button{
+    border: none;
+    scale : 110%;
+}
+
+#landing-page{
+    background-color : #EBE3D5
+}
+
+.selectionbuttons{
+    display : flex;
+    justify-content: center;
+}
+
+.login-register{
+    border: none;
+    width : 150px;
+}
