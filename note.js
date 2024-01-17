@@ -6,3 +6,14 @@
  * 
  * Once logged in, display all the stats
  */
+
+
+/**
+ * 17/1/2024
+ * 
+ * Database is done, next need to figure out what to show after the user has successfully registerd
+ * thinking of putting it back to the home page but the hope page is not loading at the moment, not sure why
+ * maybe it goes into a loop? with the photo url request but not sure
+ * 
+ * Tomorrow fix that and implement login
+ */
