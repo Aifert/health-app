@@ -4,7 +4,7 @@ import Home from "./Home"
 
 function Register(props){
 
-    const [exist, updateExist] = useState(false);
+    const [exist, updateExist] = useState(props.exist);
 
     async function convertOptions(option){
         if(option === "option1"){

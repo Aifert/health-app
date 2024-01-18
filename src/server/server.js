@@ -46,6 +46,25 @@ async function registerClient(firstname, lastname, gender, emailAddress, passwor
     }
 }
 
+async function checkClient(emailAddress, pw){
+    try{
+        const result = await db.query("SELECT password FROM credentials WHERE emailaddress = $1" , [emailAddress]);
+
+        const {password} = result.rows[0];
+
+        if(password === pw){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+    catch(error){
+        console.log("Error logging in client", error.message);
+        res.status(500).json({error : "Internal Server Error"});
+    }
+}
+
 app.get("/wallpaper/:country", (req, res) => {
     try{
         const query = req.params.country;
@@ -76,8 +95,6 @@ app.post("/register", async (req, res) => {
 
     const result = await verifyClient(emailAddress);
 
-    console.log(result);
-
     if(result){
         console.log("Registering User");
         try{
@@ -93,6 +110,20 @@ app.post("/register", async (req, res) => {
     }
     else{
         console.log("User already exists");
+        res.status(500).json({error : "Internal Server Error"});
+    }
+})
+
+app.post("/login", async (req, res) => {
+    const {emailAddress, password} = req.body;
+
+    const result = await checkClient(emailAddress, password);
+
+    if(result){
+        res.status(200).json({message : "Login Successful"})
+    }
+    else{
+        console.log("Wrong credentials");
         res.status(500).json({error : "Internal Server Error"});
     }
 })
