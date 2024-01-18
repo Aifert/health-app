@@ -2,11 +2,13 @@ import React, { useState, useEffect } from "react";
 import Register from "./Register";
 import Login from "./Login";
 import LandingPage from "./LandingPage"
+import Health from "./Health"
 
 function Home(props) {
   const [isClicked, updateisClicked] = useState(true);
   const [photoURL, setPhotoURL] = useState("LMAO");
   const [error, setError] = useState(false);
+  const [LoginSuccess, updateLoginSuccess] = useState(false);
 
   function handleonClick() {
     updateisClicked(!isClicked);
@@ -16,6 +18,10 @@ function Home(props) {
     updateisClicked(true);
 
     console.log(isClicked);
+  }
+
+  function handleLoginSuccess(){
+    updateLoginSuccess(true);
   }
 
   async function fetchData() {
@@ -50,6 +56,9 @@ function Home(props) {
     
     return (
         !error ? 
+        LoginSuccess ?
+        <Health />
+        :
         <div className="Home">
         <div>
         <section className="vh-100 gradient-custom" style = {componentStyle}>
@@ -77,6 +86,7 @@ function Home(props) {
                     />
                     <Login 
                     show = {isClicked}
+                    loginSuccess = {handleLoginSuccess}
                     />
                   </div>
                 </div>

@@ -27,6 +27,7 @@ function Login(props){
 
             if(response.ok){
                 console.log("Login Successfully");
+                props.loginSuccess();
             }
             else{
                 updatefailed(true);
@@ -63,8 +64,8 @@ function Login(props){
                 </div>
                 </div>
             </form>
-    : 
-    <></>
+        : 
+        <></>
     )
 }
 
