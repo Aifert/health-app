@@ -4,7 +4,6 @@ import Home from "./Home"
 
 function Register(props){
 
-    const [registered, updateRegistered] = useState(false);
     const [exist, updateExist] = useState(false);
 
     async function convertOptions(option){
@@ -49,7 +48,7 @@ function Register(props){
 
             if(response.ok){
                 console.log("Registered Successfully");
-                updateRegistered(true);
+                props.onSuccess();
             }
             else{
                 updateExist(true)
@@ -63,7 +62,7 @@ function Register(props){
     }
 
     return  (
-        props.show && !registered ? 
+        props.show? 
             <form onSubmit = {handleonSubmit}>
                 <div className="row">
                 {exist ? <div className = "existmessage mb-3"><h4>Please try again, this user already exist</h4></div> : <></>}
@@ -122,7 +121,7 @@ function Register(props){
                 </div>
             </form>
     : 
-    <h1>Hello World</h1>
+    <></>
     );
 }
 

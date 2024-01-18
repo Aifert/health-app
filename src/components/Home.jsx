@@ -12,6 +12,12 @@ function Home(props) {
     updateisClicked(!isClicked);
   }
 
+  function handleRegistrationSuccess(){
+    updateisClicked(true);
+
+    console.log(isClicked);
+  }
+
   async function fetchData() {
     if(photoURL === "LMAO"){
       try {
@@ -67,6 +73,7 @@ function Home(props) {
                     <hr />
                     <Register 
                     show = {!isClicked}
+                    onSuccess={handleRegistrationSuccess}
                     />
                     <Login 
                     show = {isClicked}
