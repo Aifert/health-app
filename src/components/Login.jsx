@@ -1,7 +1,9 @@
 import React, {useState} from "react";
 
 function Login(props){
-    
+
+    const [failed, updatefailed] = useState(false);
+
     async function handleonSubmit(e){
         e.preventDefault();
 
@@ -27,6 +29,7 @@ function Login(props){
                 console.log("Login Successfully");
             }
             else{
+                updatefailed(true);
                 console.error("Login failed");
                 
             }
@@ -40,6 +43,7 @@ function Login(props){
         props.show ? 
             <form onSubmit = {handleonSubmit}>
                 <div className="row">
+                {failed ? <div className = "existmessage"><h4>Wrong email or password, please try again</h4></div> : <></>}
                 <div className="col-md-6 mb-4">
                     <div className="form-outline">
                     <input type="text" id="emailAddress" className="form-control form-control-lg" />
