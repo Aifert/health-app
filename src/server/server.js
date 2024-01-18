@@ -23,8 +23,8 @@ db.connect();
 
 const client = createClient(process.env.APIKEY);
 
-async function verifyClient(firstname, lastname){
-    const result = await db.query("SELECT first_name, last_name FROM credentials WHERE first_name = $1 AND last_name = $2", [firstname, lastname]);
+async function verifyClient(emailaddress){
+    const result = await db.query("SELECT emailaddress FROM credentials WHERE emailaddress=$1", [emailaddress]);
 
     if (result.rows.length === 0){
         console.log(result.rows);
@@ -74,7 +74,7 @@ app.get("/wallpaper/:country", (req, res) => {
 app.post("/register", async (req, res) => {
     const {firstName, lastName, gender, emailAddress, password} = req.body;
 
-    const result = await verifyClient(firstName, lastName);
+    const result = await verifyClient(emailAddress);
 
     console.log(result);
 
