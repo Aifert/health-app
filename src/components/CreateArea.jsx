@@ -21,13 +21,13 @@ function CreateArea(props) {
   };
 
   function submitNote(event) {
+    event.preventDefault();
     props.onAdd(note);
     setNote({
       date : "",
       content: "",
       mode : ""
     });
-    event.preventDefault();
   }
 
   function handleonClick(action){
@@ -53,16 +53,17 @@ function CreateArea(props) {
                 borderRadius: '5px',          // Optional: Adds rounded corners
                 padding: '8px'
             }}
+            required
         />
         <div className="col-md-6 my-3 action_field">
                         <h6 className="mb-2 pb-1">What would you like to log today?</h6>
                         <div className="form-check form-check-inline">
-                        <input className="form-check-input" type="radio" name="mode" id="exercise" onChange = {handleChange} onClick={() => handleonClick("exercise")} value="exercise" />
-                        <label className="form-check-label" htmlFor="femaleGender">Exercise</label>
+                        <input className="form-check-input" type="radio" name="mode" id="exercise" onChange = {handleChange} onClick={() => handleonClick("exercise")} value="exercise"  required />
+                        <label className="form-check-label" htmlFor="exercise">Exercise</label>
                         </div>
                         <div className="form-check form-check-inline">
-                        <input className="form-check-input" type="radio" name="mode" id="food" onChange = {handleChange} value="food" onClick={() => handleonClick("food")} />
-                        <label className="form-check-label" htmlFor="maleGender">Food
+                        <input className="form-check-input" type="radio" name="mode" id="food" onChange = {handleChange} value="food" onClick={() => handleonClick("food")}  required />
+                        <label className="form-check-label" htmlFor="food">Food
                         </label>
                         </div>
             </div>
@@ -78,6 +79,7 @@ function CreateArea(props) {
                 borderRadius: '5px',          // Optional: Adds rounded corners
                 padding: '8px'
             }}
+            required
         />
         <button type="submit">Add</button>
       </form>
