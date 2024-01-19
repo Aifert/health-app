@@ -14,6 +14,10 @@ function Health() {
     }
   
     function deleteNote(id) {
+        //Delete note, need to send an id to the database to delete the note, 
+        //so we need a note database, it will include all the stats
+        // then when the user inputs a new prompt, it will update the field for that user 
+        // and display the note
       setNotes(prevNotes => {
         return prevNotes.filter((noteItem, index) => {
           return index !== id;
