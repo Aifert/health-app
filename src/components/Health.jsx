@@ -6,6 +6,8 @@ function Health() {
     const [notes, setNotes] = useState([]);
   
     function addNote(newNote) {
+        //here probably need to send a post request to server to add the note into the database
+        //depending on which kind
       setNotes(prevNotes => {
         return [...prevNotes, newNote];
       });
