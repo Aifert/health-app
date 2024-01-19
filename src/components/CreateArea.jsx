@@ -40,7 +40,19 @@ function CreateArea(props) {
   return (
     <div>
       <form>
-        <div className="col-md-6 mb-4">
+        <input
+          name="date"
+          onChange={handleChange}
+          value={note.title}
+          placeholder="Date"
+          className = "my-3"
+          style={{
+                border: '2px dashed #3498db', // Dashed border with blue color
+                borderRadius: '5px',          // Optional: Adds rounded corners
+                padding: '8px'
+            }}
+        />
+        <div className="col-md-6 my-3 action_field">
                         <h6 className="mb-2 pb-1">What would you like to log today?</h6>
                         <div className="form-check form-check-inline">
                         <input className="form-check-input" type="radio" name="inlineRadioOptions" id="exercise" onClick={() => handleonClick("exercise")} value="option1" />
@@ -52,18 +64,18 @@ function CreateArea(props) {
                         </label>
                         </div>
             </div>
-        <input
-          name="date"
-          onChange={handleChange}
-          value={note.title}
-          placeholder="Date"
-        />
         <textarea
           name="content"
           onChange={handleChange}
           value={note.content}
-          placeholder={FOOD ? "What did you eat today?" : "What did you do today?"}
+          placeholder={FOOD ? "Good food heals you, what did you eat?" : "Exercise calms you, what did you do?"}
           rows="3"
+          className = "mt-3"
+          style={{
+                border: '2px dashed #3498db', // Dashed border with blue color
+                borderRadius: '5px',          // Optional: Adds rounded corners
+                padding: '8px'
+            }}
         />
         <button onClick={submitNote}>Add</button>
       </form>
