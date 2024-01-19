@@ -2,15 +2,20 @@ import React, {useState} from "react";
 import Note from "./Note";
 import CreateArea from "./CreateArea";
 
-function Health() {
+function Health(props) {
     const [notes, setNotes] = useState([]);
   
     function addNote(newNote) {
         //here probably need to send a post request to server to add the note into the database
         //depending on which kind
+    
       setNotes(prevNotes => {
         return [...prevNotes, newNote];
       });
+
+    //   try{
+    //     const reponse = await fetch("http://localhost:4000/")
+    //   }
     }
   
     function deleteNote(id) {

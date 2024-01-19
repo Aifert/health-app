@@ -12,6 +12,8 @@ const port = 4000;
 app.use(cors());
 app.use(bodyParser.json())
 
+var user_id;
+
 const db = new pg.Client({
     user : "postgres",
     host : "localhost",
@@ -48,11 +50,12 @@ async function registerClient(firstname, lastname, gender, emailAddress, passwor
 
 async function checkClient(emailAddress, pw){
     try{
-        const result = await db.query("SELECT password FROM credentials WHERE emailaddress = $1" , [emailAddress]);
+        const result = await db.query("SELECT id, password FROM credentials WHERE emailaddress = $1" , [emailAddress]);
 
-        const {password} = result.rows[0];
+        const {id, password} = result.rows[0];
 
         if(password === pw){
+            user_id = id;
             return true;
         }
         else{
@@ -95,10 +98,12 @@ app.post("/register", async (req, res) => {
 
     const result = await verifyClient(emailAddress);
 
+    const email = emailAddress.toLowerCase();
+
     if(result){
         console.log("Registering User");
         try{
-            await registerClient(firstName, lastName, gender, emailAddress, password);
+            await registerClient(firstName, lastName, gender, email, password);
 
             console.log(`${firstName} ${lastName} has been successfully registered`);
             res.status(200).json({ message: "Registration successful" });
@@ -117,10 +122,12 @@ app.post("/register", async (req, res) => {
 app.post("/login", async (req, res) => {
     const {emailAddress, password} = req.body;
 
-    const result = await checkClient(emailAddress, password);
+    const email = emailAddress.toLowerCase();
+
+    const result = await checkClient(email, password);
 
     if(result){
-        res.status(200).json({message : "Login Successful"})
+        res.status(200).json({message : "Login Successful", userID : user_id})
     }
     else{
         console.log("Wrong credentials");

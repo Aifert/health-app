@@ -26,8 +26,11 @@ function Login(props){
             });
 
             if(response.ok){
+                const responseData = await response.json();
+                const userID = responseData.userID;
                 console.log("Login Successfully");
-                props.loginSuccess();
+                console.log(userID);
+                props.loginSuccess(userID);
             }
             else{
                 updatefailed(true);

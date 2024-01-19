@@ -9,6 +9,7 @@ function Home(props) {
   const [photoURL, setPhotoURL] = useState("LMAO");
   const [error, setError] = useState(false);
   const [LoginSuccess, updateLoginSuccess] = useState(false);
+  const [user_id, setUserID] = useState();
 
   function handleonClick() {
     updateisClicked(!isClicked);
@@ -20,7 +21,8 @@ function Home(props) {
     console.log(isClicked);
   }
 
-  function handleLoginSuccess(){
+  function handleLoginSuccess(id){
+    setUserID(id);
     updateLoginSuccess(true);
   }
 
