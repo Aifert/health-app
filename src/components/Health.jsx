@@ -5,16 +5,35 @@ import CreateArea from "./CreateArea";
 function Health(props) {
     const [notes, setNotes] = useState([]);
   
-    function addNote(newNote) {
+    async function addNote(newNote) {
         //here probably need to send a post request to server to add the note into the database
         //depending on which kind
-    
-      setNotes(prevNotes => {
-        return [...prevNotes, newNote];
-      });
+      
+    //   setNotes(prevNotes => {
+    //     return [...prevNotes, newNote];
+    //   });
+
+      try{
+        const response = await fetch(`http:localhost:4000/addNote/${props.userID}`, {
+            method : "POST",
+            headers : {
+                "Content-Type" : "application/json",
+            },
+            body : JSON.stringify(newNote)
+        });
+
+
+      }
+      catch(error){
+        console.log("Error adding note" + error.message);
+      }
 
     //   try{
-    //     const reponse = await fetch("http://localhost:4000/")
+    //     const reponse = await fetch(`http://localhost:4000/getNote/${props.userID}`)
+    //   }
+
+    //   catch(error){
+    //     console.log("Error adding note" + error.message);
     //   }
     }
   

@@ -68,6 +68,16 @@ async function checkClient(emailAddress, pw){
     }
 }
 
+async function fetchData(date, id){
+    try{
+        const result = await db.query("SELECT exercise_name, duration, food, protein, calories FROM exercise JOIN food ON exercise.user_id = food.user_id WHERE date = ${1}, user_id = {$2}", [date, id])
+
+    }
+    catch(error){
+        console.error("Error fetching data", err.message);
+    }
+}
+
 app.get("/wallpaper/:country", (req, res) => {
     try{
         const query = req.params.country;
@@ -133,6 +143,22 @@ app.post("/login", async (req, res) => {
         console.log("Wrong credentials");
         res.status(500).json({error : "Internal Server Error"});
     }
+})
+
+app.get("/getNote/:id", async (req, res) => {
+    const userID = parseInt(req.params.id);
+
+    await fetchData(id);
+}) 
+
+
+app.post("/addNote/:id", async (req, res) =>{
+    const userID = parseInt(req.params.id);
+    const {date, content, mode } = req.body;
+
+    console.log(date);
+    console.log(content);
+    console.log(mode);
 })
 
 app.listen(port, () => {

@@ -59,7 +59,9 @@ function Home(props) {
     return (
         !error ? 
         LoginSuccess ?
-        <Health />
+        <Health 
+          userID = {user_id}
+        />
         :
         <div className="Home">
         <div>
