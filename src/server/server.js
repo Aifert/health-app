@@ -78,6 +78,24 @@ async function fetchData(date, id){
     }
 }
 
+async function addNote(note){
+    const {userID, date, content, mode} = note
+
+    if(userID !== "" && date !== "" && content !== "" && mode !== ""){
+        try {
+            const query = `INSERT INTO ${mode} (user_id, date, ${mode}_name) VALUES ($1, $2, $3)`;
+    
+            const result = await db.query(
+              query,
+              [userID, date, content]
+            );
+            }
+        catch(error){
+            console.error("Error adding note", error.message);
+        }
+    }
+}
+
 app.get("/wallpaper/:country", (req, res) => {
     try{
         const query = req.params.country;
@@ -156,9 +174,9 @@ app.post("/addNote/:id", async (req, res) =>{
     const userID = parseInt(req.params.id);
     const {date, content, mode } = req.body;
 
-    console.log(date);
-    console.log(content);
-    console.log(mode);
+    const note = {userID, date, content, mode}
+
+    await addNote(note);
 })
 
 app.listen(port, () => {

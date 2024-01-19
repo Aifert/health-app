@@ -12,9 +12,9 @@ function Health(props) {
     //   setNotes(prevNotes => {
     //     return [...prevNotes, newNote];
     //   });
-
+        console.log(newNote);
       try{
-        const response = await fetch(`http:localhost:4000/addNote/${props.userID}`, {
+        const response = await fetch(`http://localhost:4000/addNote/${props.userID}`, {
             method : "POST",
             headers : {
                 "Content-Type" : "application/json",

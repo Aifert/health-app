@@ -21,10 +21,6 @@ function CreateArea(props) {
   };
 
   function submitNote(event) {
-    setNote((prevNote) => ({
-        ...prevNote,
-        ["mode"] : gender
-        }));
     props.onAdd(note);
     setNote({
       date : "",
@@ -61,11 +57,11 @@ function CreateArea(props) {
         <div className="col-md-6 my-3 action_field">
                         <h6 className="mb-2 pb-1">What would you like to log today?</h6>
                         <div className="form-check form-check-inline">
-                        <input className="form-check-input" type="radio" name="inlineRadioOptions" id="exercise" onChange = {() => setMode("exercise")} onClick={() => handleonClick("exercise")} value="exercise" />
+                        <input className="form-check-input" type="radio" name="mode" id="exercise" onChange = {handleChange} onClick={() => handleonClick("exercise")} value="exercise" />
                         <label className="form-check-label" htmlFor="femaleGender">Exercise</label>
                         </div>
                         <div className="form-check form-check-inline">
-                        <input className="form-check-input" type="radio" name="inlineRadioOptions" id="food" onChange = {() => setMode("food")} value="food" onClick={() => handleonClick("food")} />
+                        <input className="form-check-input" type="radio" name="mode" id="food" onChange = {handleChange} value="food" onClick={() => handleonClick("food")} />
                         <label className="form-check-label" htmlFor="maleGender">Food
                         </label>
                         </div>
@@ -83,7 +79,7 @@ function CreateArea(props) {
                 padding: '8px'
             }}
         />
-        <button onClick={submitNote}>Add</button>
+        <button type="submit">Add</button>
       </form>
     </div>
   );
