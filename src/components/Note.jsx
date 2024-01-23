@@ -5,20 +5,20 @@ function Note(props) {
     props.onDelete(props.id);
   }
   
-  console.log(props.exercise_names)
-  console.log(props.food_names)
+  console.log("exercise" , props.exercise_names)
+  console.log("food" , props.food_names)
 
   return (
     <div className="note">
       <h1>{props.date}</h1>
       <ul> Exercise
-      {props.exercise_names.map((nameItem) => {
+      {props.exercise_names && props.exercise_names.map((nameItem) => {
         return <li>{nameItem}</li>
       })}
       </ul>
       <hr />
       <ul> Food
-      {props.food_names.map((nameItem) => {
+      {props.food_names && props.food_names.map((nameItem) => {
         return <li>{nameItem}</li>
       })}
       </ul>

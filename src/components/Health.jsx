@@ -58,6 +58,8 @@ function Health(props) {
     loadNotes();
   }, [props.userID]); // Trigger the effect when props.userID changes
 
+  console.log(notes);
+
   return (
     <div>
       <CreateArea onAdd={addNote} />

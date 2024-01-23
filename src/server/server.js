@@ -95,10 +95,12 @@ async function organisebyDate(exercise_results,food_results){
             existingEntry.food_names.push(food_name);
         } else {
             // If no entry exists, create a new entry
-            const newEntry = { date, exerise_names:[], food_names: [food_name] };
+            const newEntry = { date, exercise_names:[], food_names: [food_name] };
             organizedData.push(newEntry);
         }
     });
+
+    console.log(organizedData);
 
     return organizedData;
 }
