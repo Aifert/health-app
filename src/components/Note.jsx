@@ -2,11 +2,8 @@ import React from "react";
 
 function Note(props) {
   function handleClick() {
-    props.onDelete(props.id);
+    props.onDelete(props.id, props.date);
   }
-  
-  console.log("exercise" , props.exercise_names)
-  console.log("food" , props.food_names)
 
   return (
     <div className="note">

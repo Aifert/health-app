@@ -2,12 +2,14 @@ import React, {useState, useEffect} from "react";
 import Note from "./Note";
 import CreateArea from "./CreateArea";
 
+const apiURL = "http://localhost:4000"
+
 function Health(props) {
   const [notes, setNotes] = useState([]);
 
   async function getNote() {
     try {
-      const response = await fetch(`http://localhost:4000/getNote/${props.userID}`);
+      const response = await fetch(`${apiURL}/getNote/${props.userID}`);
 
       if (response.ok) {
         const responseData = await response.json();
@@ -21,7 +23,7 @@ function Health(props) {
 
   async function addNote(newNote) {
     try {
-      const addResponse = await fetch(`http://localhost:4000/addNote/${props.userID}`, {
+      const addResponse = await fetch(`${apiURL}/addNote/${props.userID}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -40,12 +42,33 @@ function Health(props) {
     }
   }
 
-  function deleteNote(id) {
+  async function deleteNote(id, date) {
+
     setNotes((prevNotes) => {
       return prevNotes.filter((noteItem, index) => {
         return index !== id;
       });
     });
+    
+    const req_body = {Date : date};
+    try{
+      const deleteResponse = await fetch(`${apiURL}/deleteNote/${props.userID}`, {
+        method : "POST",
+        headers : {
+          "Content-Type" : "application/json",
+        },
+        body : JSON.stringify(req_body)
+      });
+
+      console.log(deleteResponse);
+    }
+    catch(error){
+      console.log("Error deleting note", error.message);
+    }
+
+
+
+
   }
 
   useEffect(() => {
@@ -57,8 +80,6 @@ function Health(props) {
 
     loadNotes();
   }, [props.userID]); // Trigger the effect when props.userID changes
-
-  console.log(notes);
 
   return (
     <div>

@@ -17,19 +17,21 @@ function CreateArea(props) {
     // Call the onAdd function with the note object
     props.onAdd(note);
   }
-  
+
   return (
     <div>
       <form onSubmit={submitNote}>
         <input
           name="date"
-          placeholder="Date"
+          placeholder="Date (dd/mm/yyyy)"
           className="my-3"
           style={{
             border: '2px dashed #3498db',
             borderRadius: '5px',
             padding: '8px'
           }}
+          pattern="\d{1,2}/\d{1,2}/\d{4}"
+          title="Please enter a date in the format dd/mm/yyyy"
           required
         />
         <div className="col-md-6 my-3 action_field">

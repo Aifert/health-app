@@ -100,8 +100,6 @@ async function organisebyDate(exercise_results,food_results){
         }
     });
 
-    console.log(organizedData);
-
     return organizedData;
 }
 
@@ -141,6 +139,21 @@ async function addNoteToDb(note){
             }
         catch(error){
             console.error("Error adding note", error.message);
+        }
+    }
+}
+
+async function deletefromDB(id, date){
+    if(id && date){
+        try{
+            const exercise_query = `DELETE FROM exercise WHERE user_id = $1 AND date = $2`;
+            const food_query = `DELETE FROM food WHERE user_id = $1 AND date = $2`;
+
+            const eresult = await db.query(exercise_query, [id, date]);
+            const fresult = await db.query(food_query, [id, date]);
+        }
+        catch(error){
+            console.log("Error deleting entry ", error.message);
         }
     }
 }
@@ -245,6 +258,13 @@ app.post("/addNote/:id", async (req, res) =>{
     catch(error){
         res.status(500).json({message : "Failed to addNote"});
     }
+})
+
+app.post("/deleteNote/:id", async (req, res) => {
+    const userID = parseInt(req.params.id);
+    const {Date} = req.body;
+
+    await deletefromDB(userID, Date);
 })
 
 app.listen(port, () => {
