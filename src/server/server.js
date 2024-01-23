@@ -68,29 +68,37 @@ async function checkClient(emailAddress, pw){
     }
 }
 
-async function organisebyDate(results, mode){
-    const organizedData = {};
+async function organisebyDate(exercise_results,food_results){
+    const organizedData = [];
+    let currentEntry;
 
-    results.forEach((result) => {
-        if(mode === "exercise"){
-            const {date, exercise_name} = result;
+    exercise_results.forEach((result) => {
+        const {date, exercise_name} = result;
 
-            if(!organizedData[date]){
-                organizedData[date] = {names : []};
+        if (!currentEntry || currentEntry.date !== date) {
+            // Create a new entry if the date changes
+            currentEntry = { date, exercise_names: [], food_names : [] };
+            organizedData.push(currentEntry);
             }
-
-            organizedData[date].names.push(exercise_name);            
-        }
-        else{
-            const {date, food_name} = result;
-
-            if(!organizedData[date]){
-                organizedData[date] = {names : []};
-            }
-
-            organizedData[date].names.push(food_name);                  
-        }
+        
+            currentEntry.exercise_names.push(exercise_name);
     })
+
+    food_results.forEach((result) => {
+        const { date, food_name } = result;
+    
+        // Search for an existing entry with the same date
+        const existingEntry = organizedData.find((entry) => entry.date === date);
+    
+        if (existingEntry) {
+            // If an entry exists, append the food_name to the names array
+            existingEntry.food_names.push(food_name);
+        } else {
+            // If no entry exists, create a new entry
+            const newEntry = { date, exerise_names:[], food_names: [food_name] };
+            organizedData.push(newEntry);
+        }
+    });
 
     return organizedData;
 }
@@ -108,10 +116,9 @@ async function fetchData(id) {
         ),
       ]);
 
-      const exercise_res = await organisebyDate(exercise_Result.rows, "exercise");
-      const food_res = await organisebyDate(food_Result.rows, "food");
+      const res = await organisebyDate(exercise_Result.rows, food_Result.rows);
 
-      return {exercise_res, food_res}
+      return res
     } catch (error) {
       console.error("Error fetching data", error.message);
     }
@@ -208,10 +215,10 @@ app.get("/getNote/:id", async (req, res) => {
 
     console.log("Getting note");
 
-    const {exercise_res, food_res} = await fetchData(userID);
+    const response = await fetchData(userID);
 
-    if(exercise_res || food_res){
-        res.status(200).json({message : "Successful", exercise : exercise_res, food : food_res})
+    if(response){
+        res.status(200).json({message : "Successful", result : response})
     }
     else{
         console.log("Error fetching data");
