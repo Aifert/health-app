@@ -68,17 +68,57 @@ async function checkClient(emailAddress, pw){
     }
 }
 
-async function fetchData(date, id){
-    try{
-        const result = await db.query("SELECT exercise_name, duration, food, protein, calories FROM exercise JOIN food ON exercise.user_id = food.user_id WHERE date = ${1}, user_id = {$2}", [date, id])
+async function organisebyDate(results, mode){
+    const organizedData = {};
 
-    }
-    catch(error){
-        console.error("Error fetching data", err.message);
-    }
+    results.forEach((result) => {
+        if(mode === "exercise"){
+            const {date, exercise_name} = result;
+
+            if(!organizedData[date]){
+                organizedData[date] = {names : []};
+            }
+
+            organizedData[date].names.push(exercise_name);            
+        }
+        else{
+            const {date, food_name} = result;
+
+            if(!organizedData[date]){
+                organizedData[date] = {names : []};
+            }
+
+            organizedData[date].names.push(food_name);                  
+        }
+    })
+
+    return organizedData;
 }
 
-async function addNote(note){
+async function fetchData(id) {
+    try {
+      const [exercise_Result, food_Result] = await Promise.all([
+        db.query(
+          "SELECT user_id, exercise_name, date FROM exercise WHERE user_id = $1 ORDER BY date",
+          [id]
+        ),
+        db.query(
+          "SELECT user_id, food_name, date FROM food WHERE user_id = $1 ORDER BY date",
+          [id]
+        ),
+      ]);
+
+      const exercise_res = await organisebyDate(exercise_Result.rows, "exercise");
+      const food_res = await organisebyDate(food_Result.rows, "food");
+
+      return {exercise_res, food_res}
+    } catch (error) {
+      console.error("Error fetching data", error.message);
+    }
+  }
+  
+
+async function addNoteToDb(note){
     const {userID, date, content, mode} = note
 
     if(userID !== "" && date !== "" && content !== "" && mode !== ""){
@@ -166,7 +206,17 @@ app.post("/login", async (req, res) => {
 app.get("/getNote/:id", async (req, res) => {
     const userID = parseInt(req.params.id);
 
-    await fetchData(id);
+    console.log("Getting note");
+
+    const {exercise_res, food_res} = await fetchData(userID);
+
+    if(exercise_res || food_res){
+        res.status(200).json({message : "Successful", exercise : exercise_res, food : food_res})
+    }
+    else{
+        console.log("Error fetching data");
+        res.status(500).json({error : "Internal Server Error"});
+    }
 }) 
 
 
@@ -176,7 +226,16 @@ app.post("/addNote/:id", async (req, res) =>{
 
     const note = {userID, date, content, mode}
 
-    await addNote(note);
+    console.log("Adding note");
+
+    try{
+        await addNoteToDb(note);
+
+        res.status(200).json({ success: true });
+    }
+    catch(error){
+        res.status(500).json({message : "Failed to addNote"});
+    }
 })
 
 app.listen(port, () => {

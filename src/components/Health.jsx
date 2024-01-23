@@ -12,7 +12,6 @@ function Health(props) {
     //   setNotes(prevNotes => {
     //     return [...prevNotes, newNote];
     //   });
-        console.log(newNote);
       try{
         const response = await fetch(`http://localhost:4000/addNote/${props.userID}`, {
             method : "POST",
@@ -22,19 +21,19 @@ function Health(props) {
             body : JSON.stringify(newNote)
         });
 
+        const getNote = await fetch(`http://localhost:4000/getNote/${props.userID}`)
+
+        if(getNote.ok){
+          const responseData = await getNote.json();
+          const {exercise, food} = responseData;
+
+          //Next is updating the notes state so it can include show everything that we have extracted so far
+        }
 
       }
       catch(error){
         console.log("Error adding note" + error.message);
       }
-
-    //   try{
-    //     const reponse = await fetch(`http://localhost:4000/getNote/${props.userID}`)
-    //   }
-
-    //   catch(error){
-    //     console.log("Error adding note" + error.message);
-    //   }
     }
   
     function deleteNote(id) {
