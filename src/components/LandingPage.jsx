@@ -14,8 +14,8 @@ function LandingPage(props){
     }
     
     return (
-        !countryProvided ?
-        <div id = "landing-page">
+      !countryProvided ? 
+        <div id="landing-page">
         <section className="vh-100 gradient-custom">
           <div className="container py-5 h-100">
             <div className="row justify-content-center align-items-center h-100">
