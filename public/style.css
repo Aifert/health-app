@@ -163,3 +163,14 @@ h4{
     outline: none;
   }
   
+  .date {
+    display: inline-block;
+    background-color: rgba(245, 186, 19, 0.7);
+    padding: 5px;
+    border-radius: 10px;
+  }
+
+  .date-container{
+    display : flex;
+    justify-content: center;
+  }

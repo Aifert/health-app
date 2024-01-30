@@ -7,7 +7,11 @@ function Note(props) {
 
   return (
     <div className="note">
-      <h1>{props.date}</h1>
+      <div className="date-container">
+        <div className = "date mb-3">
+          <h1>{props.date}</h1>
+        </div>
+      </div>
       <ul> Exercise
       {props.exercise_names && props.exercise_names.map((nameItem) => {
         return <li>{nameItem}</li>
