@@ -4,10 +4,12 @@ import cors from "cors";
 import 'dotenv/config';
 import {createClient} from "pexels";
 import pg from "pg";
-import bodyParser from "body-parser";
+import bodyParser from "body-parser"
+import bcrypt from "bcrypt";
 
 const app = express();
 const port = 4000;
+const saltRounds = 10;
 
 app.use(cors());
 app.use(bodyParser.json())
@@ -37,6 +39,12 @@ async function verifyClient(emailaddress){
     }
 }
 
+async function saltPassword(password){
+    const hash = bcrypt.hashSync(password, saltRounds);
+
+    return hash;
+}
+
 async function registerClient(firstname, lastname, gender, emailAddress, password){
     try{
         await db.query("INSERT INTO credentials (first_name, last_name, emailaddress, password, gender) VALUES \
@@ -54,7 +62,7 @@ async function checkClient(emailAddress, pw){
 
         const {id, password} = result.rows[0];
 
-        if(password === pw){
+        if(bcrypt.compareSync(pw, password)){
             user_id = id;
             return true;
         }
@@ -188,12 +196,14 @@ app.post("/register", async (req, res) => {
 
     const result = await verifyClient(emailAddress);
 
+    const saltedPw = await saltPassword(password);
+
     const email = emailAddress.toLowerCase();
 
     if(result){
         console.log("Registering User");
         try{
-            await registerClient(firstName, lastName, gender, email, password);
+            await registerClient(firstName, lastName, gender, email, saltedPw);
 
             console.log(`${firstName} ${lastName} has been successfully registered`);
             res.status(200).json({ message: "Registration successful" });

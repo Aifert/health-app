@@ -6,18 +6,6 @@ function Register(props){
 
     const [exist, updateExist] = useState(props.exist);
 
-    async function convertOptions(option){
-        if(option === "option1"){
-            return "Female"
-        }
-        else if (option === "option2"){
-            return "Male"
-        }
-        else{
-            return "Other"
-        }
-    }
-
     async function handleonSubmit(e){
         e.preventDefault();
 
@@ -27,12 +15,10 @@ function Register(props){
         const emailAddress = document.getElementById("emailAddress").value;
         const password = document.getElementById("password").value;
 
-        var convertedGender = await convertOptions(gender);
-
         const data = {
             firstName,
             lastName,
-            convertedGender,
+            gender,
             emailAddress,
             password,
         };
@@ -89,15 +75,15 @@ function Register(props){
                 <div className="col-md-6 mb-4">
                     <h6 className="mb-2 pb-1">Gender: </h6>
                     <div className="form-check form-check-inline">
-                    <input className="form-check-input" type="radio" name="inlineRadioOptions" id="femaleGender" value="option1" checked />
+                    <input className="form-check-input" type="radio" name="inlineRadioOptions" id="femaleGender" value="Female" checked />
                     <label className="form-check-label" htmlFor="femaleGender">Female</label>
                     </div>
                     <div className="form-check form-check-inline">
-                    <input className="form-check-input" type="radio" name="inlineRadioOptions" id="maleGender" value="option2" />
+                    <input className="form-check-input" type="radio" name="inlineRadioOptions" id="maleGender" value="Male" />
                     <label className="form-check-label" htmlFor="maleGender">Male</label>
                     </div>
                     <div className="form-check form-check-inline">
-                    <input className="form-check-input" type="radio" name="inlineRadioOptions" id="otherGender" value="option3" />
+                    <input className="form-check-input" type="radio" name="inlineRadioOptions" id="otherGender" value="Other" />
                     <label className="form-check-label" htmlFor="otherGender">Other</label>
                     </div>
                 </div>
