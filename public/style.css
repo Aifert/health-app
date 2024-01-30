@@ -174,3 +174,8 @@ h4{
     display : flex;
     justify-content: center;
   }
+
+  .error-message{
+    display: flex;
+    justify-content: center;
+  }

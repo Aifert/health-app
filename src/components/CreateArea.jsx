@@ -23,10 +23,35 @@ function CreateArea(props) {
     const mode = event.target.elements.mode.value;
     const content = event.target.elements.content.value;
 
-    const temp = date.split("/");
+    if (dateValidity) {
+      return;
+    }
 
+    const [day, month, year] = date.split('/').map(String);
+
+    var temp;
+    var note;
+
+    if(day.length === 1 || month.length == 1){
+        if(day.length === 1 && month.length === 1){
+          temp = `0${day}/0${month}/${year}`
+        }
+        else if(day.length === 1){
+          temp = `0${day}/${month}/${year}`
+        }
+        else{
+          temp = `${day}/0${month}/${year}`
+        }
+
+        console.log(temp);
+        note = {date : temp, mode, content};
+    }
+    else{
+      note = {date, mode, content };
+    }
+
+    console.log(note);
     // Create a note object from form values
-    const note = { date, mode, content };
 
     // Call the onAdd function with the note object
     props.onAdd(note);
@@ -35,6 +60,7 @@ function CreateArea(props) {
   return (
     <div>
       <form className="createarea" onSubmit={submitNote}>
+      {dateValidity && <div className="error-message">{dateValidity}</div>}
         <input
           name="date"
           placeholder="Date (dd/mm/yyyy)"
