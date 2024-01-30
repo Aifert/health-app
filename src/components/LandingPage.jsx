@@ -44,7 +44,6 @@ function LandingPage(props){
                         </div>
                         </form>
                     </div>
-                    <hr />
                   </div>
                 </div>
               </div>

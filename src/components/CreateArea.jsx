@@ -20,7 +20,7 @@ function CreateArea(props) {
 
   return (
     <div>
-      <form onSubmit={submitNote}>
+      <form className="createarea" onSubmit={submitNote}>
         <input
           name="date"
           placeholder="Date (dd/mm/yyyy)"
@@ -75,7 +75,7 @@ function CreateArea(props) {
           }}
           required
         />
-        <button type="submit">Add</button>
+        <button className="add_note" type="submit">Add</button>
       </form>
     </div>
   );

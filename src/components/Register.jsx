@@ -63,7 +63,7 @@ function Register(props){
 
     return  (
         props.show? 
-            <form onSubmit = {handleonSubmit}>
+            <form className="register" onSubmit = {handleonSubmit}>
                 <div className="row">
                 {exist ? <div className = "existmessage mb-3"><h4>Please try again, this user already exist</h4></div> : <></>}
                 <div className="col-md-6 mb-4">

@@ -27,11 +27,17 @@
 
 #landing-button{
     border: none;
-    scale : 110%;
+    padding : 5px;
+    border-radius : 8px;
+    background-color:#f5ba13
 }
 
 #landing-page{
-    background-color : #EBE3D5
+    background-color : #EBE3D5;
+}
+
+.homepage{
+  transform : scale(0.6);
 }
 
 .selectionbuttons{
@@ -123,8 +129,7 @@ h4{
     cursor: pointer;
     outline: none;
   }
-  
-  form {
+  .createarea {
     position: relative;
     width: 480px;
     margin: 30px auto 20px auto;
@@ -143,7 +148,7 @@ h4{
     font-family: inherit;
     resize: none;
   }
-  form button {
+  form .add_note{
     position: absolute;
     right: 18px;
     bottom: -18px;

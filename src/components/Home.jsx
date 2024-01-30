@@ -66,7 +66,7 @@ function Home(props) {
         <div className="Home">
         <div>
         <section className="vh-100 gradient-custom" style = {componentStyle}>
-          <div className="container py-5 h-100">
+          <div className="container py-5 h-100 homepage">
             <div className="row justify-content-center align-items-center h-100">
               <div className="col-12 col-lg-9 col-xl-7">
                 <div className="card shadow-2-strong card-registration" style={{ borderRadius: '15px' }}>
