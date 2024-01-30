@@ -1,4 +1,5 @@
 
+
 .gradient-custom {
     /* fallback for old browsers */
     /* background: #f093fb; */
@@ -61,17 +62,9 @@ h4{
     color : #FF6961
 }
 
-
-* {
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
-  }
   html {
     font-family: "Montserrat", sans-serif;
-  }
-  body {
-    padding : -1000px;
+    background-color : #EBE3D5;
   }
   
   header {
@@ -177,4 +170,8 @@ h4{
   .error-message{
     display: flex;
     justify-content: center;
+  }
+
+  .note, .create{
+    transform : scale(0.8);
   }

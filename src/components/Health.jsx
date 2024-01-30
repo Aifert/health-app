@@ -84,8 +84,8 @@ function Health(props) {
   
 
   return (
-    <div>
-      <CreateArea onAdd={addNote} />
+    <div style = {props.componentstyle}>
+      <CreateArea onAdd={addNote}/>
       {notes.map((noteItem, index) => (
         <Note
           key={index}

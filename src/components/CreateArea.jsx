@@ -58,7 +58,7 @@ function CreateArea(props) {
   }
 
   return (
-    <div>
+    <div className="create">
       <form className="createarea" onSubmit={submitNote}>
       {dateValidity && <div className="error-message">{dateValidity}</div>}
         <input

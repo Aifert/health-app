@@ -65,6 +65,7 @@ function Home(props) {
         LoginSuccess ?
         <Health 
           userID = {user_id}
+          componentstyle = {componentStyle}
         />
         :
         <div className="Home">
@@ -78,22 +79,22 @@ function Home(props) {
                   <div className="row">
                 <div className="col-md-6 mb-4">
                     <div className="form-outline selectionbuttons">
-                    <button onClick = {() => handleonClick("register")} className = "login-register p-3">Login</button>
+                    <button onClick = {() => handleonClick("login")} className = "login-register p-3">Login</button>
                     </div>
                 </div>
                 <div className="col-md-6 mb-4">
                     <div className="form-outline selectionbuttons">
-                    <button onClick = {() => handleonClick("login")} className = "login-register p-3">Register</button>
+                    <button onClick = {() => handleonClick("register")} className = "login-register p-3">Register</button>
                     </div>
                 </div>
                 </div>
                     <hr />
                     <Register 
-                    show = {isClicked}
+                    show = {!isClicked}
                     onSuccess={handleRegistrationSuccess}
                     />
                     <Login 
-                    show = {!isClicked}
+                    show = {isClicked}
                     loginSuccess = {handleLoginSuccess}
                     />
                   </div>
