@@ -1,3 +1,4 @@
+
 .gradient-custom {
     /* fallback for old browsers */
     /* background: #f093fb; */
@@ -70,8 +71,7 @@ h4{
     font-family: "Montserrat", sans-serif;
   }
   body {
-    background: #eee;
-    padding: 0 16px;
+    padding : -1000px;
   }
   
   header {
