@@ -6,13 +6,17 @@ import Health from "./Health"
 
 function Home(props) {
   const [isClicked, updateisClicked] = useState(true);
+  const [action, setAction] = useState("login");
   const [photoURL, setPhotoURL] = useState("LMAO");
   const [error, setError] = useState(false);
   const [LoginSuccess, updateLoginSuccess] = useState(false);
   const [user_id, setUserID] = useState();
 
-  function handleonClick() {
-    updateisClicked(!isClicked);
+  function handleonClick(click) {
+    if(click !== action){
+      updateisClicked(!isClicked);
+      setAction(click);
+    }
   }
 
   function handleRegistrationSuccess(){
@@ -74,22 +78,22 @@ function Home(props) {
                   <div className="row">
                 <div className="col-md-6 mb-4">
                     <div className="form-outline selectionbuttons">
-                    <button onClick = {handleonClick} className = "login-register p-3">Login</button>
+                    <button onClick = {() => handleonClick("register")} className = "login-register p-3">Login</button>
                     </div>
                 </div>
                 <div className="col-md-6 mb-4">
                     <div className="form-outline selectionbuttons">
-                    <button onClick = {handleonClick} className = "login-register p-3">Register</button>
+                    <button onClick = {() => handleonClick("login")} className = "login-register p-3">Register</button>
                     </div>
                 </div>
                 </div>
                     <hr />
                     <Register 
-                    show = {!isClicked}
+                    show = {isClicked}
                     onSuccess={handleRegistrationSuccess}
                     />
                     <Login 
-                    show = {isClicked}
+                    show = {!isClicked}
                     loginSuccess = {handleLoginSuccess}
                     />
                   </div>

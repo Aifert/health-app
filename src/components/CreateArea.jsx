@@ -1,7 +1,19 @@
-import React, { useState } from "react";
+import React, { useState , useCallback} from "react";
 
 function CreateArea(props) {
   const [FOOD, setFOOD] = useState(false);
+  const [dateValidity, setDateValidity] = useState('');
+
+  const handleDateInput = useCallback((event) => {
+    const dateInput = event.target.value;
+    const [day, month, year] = dateInput.split('/').map(Number);
+
+    if (day > 31 || month > 12) {
+      setDateValidity('Invalid date');
+    } else {
+      setDateValidity('');
+    }
+  }, []);
 
   function submitNote(event) {
     event.preventDefault();
@@ -10,6 +22,8 @@ function CreateArea(props) {
     const date = event.target.elements.date.value;
     const mode = event.target.elements.mode.value;
     const content = event.target.elements.content.value;
+
+    const temp = date.split("/");
 
     // Create a note object from form values
     const note = { date, mode, content };
@@ -33,6 +47,7 @@ function CreateArea(props) {
           pattern="\d{1,2}/\d{1,2}/\d{4}"
           title="Please enter a date in the format dd/mm/yyyy"
           required
+          onInput={handleDateInput}
         />
         <div className="col-md-6 my-3 action_field">
           <h6 className="mb-2 pb-1">What would you like to log today?</h6>
