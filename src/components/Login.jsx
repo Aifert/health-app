@@ -63,7 +63,7 @@ function Login(props){
                 </div>
                 <div className="mt-4 pt-2">
                 <div className = "selectionbuttons">
-                    <input className="btn btn-primary btn-lg" type="submit" value="Submit" />
+                    <input className="btn btn-lg" type="submit" value="Submit" />
                 </div>
                 </div>
             </form>

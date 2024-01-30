@@ -51,7 +51,7 @@ function Home(props) {
   const componentStyle = {
     backgroundImage: `url(${photoURL})`,
     backgroundSize: "cover",
-    backgroundPosition: "center", // Adjust as needed
+    backgroundPosition: "center",
     width: "100%",
     height: "100vh",
   };
@@ -65,7 +65,7 @@ function Home(props) {
         :
         <div className="Home">
         <div>
-        <section className="vh-100 gradient-custom" style = {componentStyle}>
+        <section className="background vh-100 gradient-custom" style = {componentStyle}>
           <div className="container py-5 h-100 homepage">
             <div className="row justify-content-center align-items-center h-100">
               <div className="col-12 col-lg-9 col-xl-7">

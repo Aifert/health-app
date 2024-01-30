@@ -17,3 +17,10 @@
  * 
  * Tomorrow fix that and implement login
  */
+
+/**
+ * 30/1/2024 
+ * 
+ * Not sure why the thing isn't spanning the full page might be something from the parent
+ * preventing it from filling the whole page
+ */

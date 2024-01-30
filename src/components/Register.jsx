@@ -117,7 +117,7 @@ function Register(props){
                 </div>
                 </div>
                 <div className="mt-4 pt-2 selectionbuttons">
-                <input className="btn btn-primary btn-lg" type="submit" value="Submit" />
+                <input className="btn btn-lg" type="submit" value="Submit" />
                 </div>
             </form>
     : 
