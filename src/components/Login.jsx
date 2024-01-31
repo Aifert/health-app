@@ -3,6 +3,7 @@ import React, {useState} from "react";
 function Login(props){
 
     const [failed, updatefailed] = useState(false);
+    const [message, updatemessage] = useState("");
 
     async function handleonSubmit(e){
         e.preventDefault();
@@ -24,6 +25,7 @@ function Login(props){
                 },
                 body : JSON.stringify(data)
             });
+            
 
             if(response.ok){
                 const responseData = await response.json();
@@ -33,7 +35,9 @@ function Login(props){
                 props.loginSuccess(userID);
             }
             else{
+                const errorData = await response.json();
                 updatefailed(true);
+                updatemessage(errorData.error);
                 console.error("Login failed");
                 
             }
@@ -47,7 +51,7 @@ function Login(props){
         props.show ? 
             <form onSubmit = {handleonSubmit}>
                 <div className="row">
-                {failed ? <div className = "existmessage"><h4>Wrong email or password, please try again</h4></div> : <></>}
+                {failed ? <div className = "existmessage"><h4>{message}</h4></div> : <></>}
                 <div className="col-md-6 mb-4">
                     <div className="form-outline">
                     <input type="text" id="emailAddress" className="form-control form-control-lg" />

@@ -60,15 +60,22 @@ async function checkClient(emailAddress, pw){
     try{
         const result = await db.query("SELECT id, password FROM credentials WHERE emailaddress = $1" , [emailAddress]);
 
-        const {id, password} = result.rows[0];
+        if(result.rowCount !== 0){
+            const {id, password} = result.rows[0];
 
-        if(bcrypt.compareSync(pw, password)){
-            user_id = id;
-            return true;
+            if(bcrypt.compareSync(pw, password)){
+                user_id = id;
+                return {valid : true , message : "Login Successful"}
+            }
+            else{
+                return {valid : false, message : "Wrong email or password, please try again"}
+            }
         }
         else{
-            return false;
+            return {valid : false, message : "User does not exist"};
         }
+
+       
     }
     catch(error){
         console.log("Error logging in client", error.message);
@@ -225,13 +232,13 @@ app.post("/login", async (req, res) => {
     const email = emailAddress.toLowerCase();
 
     const result = await checkClient(email, password);
-
-    if(result){
+    
+    if(result.valid){
         res.status(200).json({message : "Login Successful", userID : user_id})
     }
     else{
         console.log("Wrong credentials");
-        res.status(500).json({error : "Internal Server Error"});
+        res.status(500).json({error : result.message});
     }
 })
 

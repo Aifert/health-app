@@ -175,3 +175,7 @@ h4{
   .note, .create{
     transform : scale(0.8);
   }
+
+  html{
+    margin : 0;
+  }
