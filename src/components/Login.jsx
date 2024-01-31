@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 
 function Login(props){
 
@@ -47,11 +47,31 @@ function Login(props){
         }
     }
 
+    useEffect(() => {
+        let timeoutId;
+    
+        if (failed) {
+          timeoutId = setTimeout(() => {
+            updatefailed(false);
+            updatemessage('');
+          }, 5000);
+        }
+    
+        return () => {
+          clearTimeout(timeoutId);
+        };
+      }, [failed]);
+
     return(
         props.show ? 
             <form onSubmit = {handleonSubmit}>
                 <div className="row">
-                {failed ? <div className = "existmessage"><h4>{message}</h4></div> : <></>}
+                {failed ? (
+                    <div className="existmessage">
+                        <h4>{message}</h4>
+                    </div>
+                ) : <></>}
+
                 <div className="col-md-6 mb-4">
                     <div className="form-outline">
                     <input type="text" id="emailAddress" className="form-control form-control-lg" />

@@ -31,7 +31,6 @@ async function verifyClient(emailaddress){
     const result = await db.query("SELECT emailaddress FROM credentials WHERE emailaddress=$1", [emailaddress]);
 
     if (result.rows.length === 0){
-        console.log(result.rows);
         return true;
     }
     else{
@@ -208,7 +207,6 @@ app.post("/register", async (req, res) => {
     const email = emailAddress.toLowerCase();
 
     if(result){
-        console.log("Registering User");
         try{
             await registerClient(firstName, lastName, gender, email, saltedPw);
 
@@ -222,7 +220,7 @@ app.post("/register", async (req, res) => {
     }
     else{
         console.log("User already exists");
-        res.status(500).json({error : "Internal Server Error"});
+        res.status(500).json({error : "Internal Server Error", message : "User already Exist, try logging in instead"});
     }
 })
 
@@ -232,7 +230,7 @@ app.post("/login", async (req, res) => {
     const email = emailAddress.toLowerCase();
 
     const result = await checkClient(email, password);
-    
+
     if(result.valid){
         res.status(200).json({message : "Login Successful", userID : user_id})
     }

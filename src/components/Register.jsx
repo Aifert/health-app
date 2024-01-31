@@ -1,5 +1,4 @@
-import React, {useState} from "react";
-import Home from "./Home"
+import React, {useState, useEffect} from "react";
 
 
 function Register(props){
@@ -46,6 +45,23 @@ function Register(props){
             console.error("Error during Registration:", error);
         }
     }
+
+
+    useEffect(() => {
+        let timeoutId;
+    
+        if (exist) {
+          timeoutId = setTimeout(() => {
+            updateExist(false);
+            // updatemessage('');
+          }, 5000);
+        }
+    
+        return () => {
+          clearTimeout(timeoutId);
+        };
+      }, [exist]);
+
 
     return  (
         props.show? 
