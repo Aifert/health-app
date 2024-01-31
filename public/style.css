@@ -179,3 +179,8 @@ h4{
   html{
     margin : 0;
   }
+
+  .contentarea{
+    display : flex;
+    flex-direction : row;
+  }

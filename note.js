@@ -24,3 +24,10 @@
  * Not sure why the thing isn't spanning the full page might be something from the parent
  * preventing it from filling the whole page
  */
+
+/**
+ * 
+ * 31/1/2024
+ * 
+ * Want to add protein etc and a circle diagram 
+ */

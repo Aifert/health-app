@@ -104,18 +104,93 @@ function CreateArea(props) {
             </label>
           </div>
         </div>
-        <textarea
-          name="content"
-          placeholder={FOOD ? "Good food heals you, what did you eat?" : "Exercise calms you, what did you do?"}
-          rows="3"
-          className="mt-3"
-          style={{
-            border: '2px dashed #3498db',
-            borderRadius: '5px',
-            padding: '8px'
-          }}
-          required
-        />
+        <div className = "contentarea">
+          <textarea
+            name="content"
+            placeholder={FOOD ? "Good food heals you, what did you eat?" : "Exercise calms you, what did you do?"}
+            rows="3"
+            className="mt-3"
+            style={{
+              border: '2px dashed #3498db',
+              borderRadius: '5px',
+              padding: '8px',
+              marginRight : '15px',
+              width : 'auto'
+            }}
+            required
+          />
+        <div className = "details">
+        {FOOD ? 
+        <div>
+        <div style={{ display: 'flex', alignItems: 'baseline' }}>
+              <label htmlFor="protein" style={{ marginRight: '5px', opacity : '80%' }}>Protein:</label>
+              <input
+                type="text"
+                id="protein"
+                name="protein"
+                placeholder="Enter Protein Value"
+                className="mt-3"
+                style={{
+                  border: '2px dashed #3498db',
+                  borderRadius: '5px',
+                  fontSize: '16px', // Adjust the font size as needed
+                }}
+                required
+              />
+        </div>
+        <div style={{ display: 'flex', alignItems: 'baseline' }}>
+              <label htmlFor="calories" style={{ marginRight: '5px', opacity : '80%' }}>Calories:</label>
+              <input
+                type="text"
+                id="calories"
+                name="Calories"
+                placeholder="Enter calories Value"
+                className="mt-3"
+                style={{
+                  border: '2px dashed #3498db',
+                  borderRadius: '5px',
+                  fontSize: '16px', // Adjust the font size as needed
+                }}
+                required
+              />
+        </div>
+        <div style={{ display: 'flex', alignItems: 'baseline' }}>
+              <label htmlFor="carbs" style={{ marginRight: '5px', opacity : '80%' }}>Carbs:</label>
+              <input
+                type="text"
+                id="carbs"
+                name="carbs"
+                placeholder="Enter Carbs Value"
+                className="mt-3"
+                style={{
+                  border: '2px dashed #3498db',
+                  borderRadius: '5px',
+                  fontSize: '16px', // Adjust the font size as needed
+                }}
+                required
+              />
+        </div>
+        </div> 
+        :
+        <div style={{ display: 'flex', alignItems: 'baseline' }}>
+              <label htmlFor="minutes" style={{ marginRight: '5px', opacity : '80%' }}>Minutes:</label>
+              <input
+                type="text"
+                id="minutes"
+                name="minutes"
+                placeholder="Enter Minutes Value"
+                className="mt-3"
+                style={{
+                  border: '2px dashed #3498db',
+                  borderRadius: '5px',
+                  fontSize: '16px', // Adjust the font size as needed
+                }}
+                required
+              />
+        </div>}
+        </div>          
+
+        </div>
         <button className="add_note" type="submit">Add</button>
       </form>
     </div>
