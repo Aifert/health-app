@@ -2,7 +2,21 @@ import React, { useState , useCallback} from "react";
 
 function CreateArea(props) {
   const [FOOD, setFOOD] = useState(false);
+  const [placeholder , setPlaceholder] = useState("Exercise calms you, what did you do?")
   const [dateValidity, setDateValidity] = useState('');
+
+  const handleModeChange = (event) =>{
+    const selectedMode = event.target.value;
+
+    if(selectedMode === "food"){
+      setFOOD(true);
+      setPlaceholder("Good food heals you, what did you eat today?");
+    }
+    else{
+      setFOOD(false);
+      setPlaceholder("Exercise calms you, what did you do?")
+    }
+  }
 
   const handleDateInput = useCallback((event) => {
     const dateInput = event.target.value;
@@ -29,9 +43,9 @@ function CreateArea(props) {
     }
 
     if(FOOD){
-      const protein = event.target.elements.protein.value;
-      const calories = event.target.elements.calories.value;
-      const carbs = event.target.elements.carbs.value;
+      const protein = event.target.elements.protein.value && event.target.elements.protein.value >= 0 ? event.target.elements.protein.value : 0;
+      const calories = event.target.elements.calories.value && event.target.elements.calories.value >= 0 ?  event.target.elements.calories.value : 0;
+      const carbs = event.target.elements.carbs.value && event.target.elements.carbs.value >= 0 ? event.target.elements.carbs.value : 0;
       details = {protein : protein, calories : calories, carbs : carbs};
     }
     else{
@@ -94,6 +108,7 @@ function CreateArea(props) {
               name="mode"
               id="exercise"
               value="exercise"
+              onChange={handleModeChange}
               required
             />
             <label className="form-check-label" htmlFor="exercise">
@@ -107,6 +122,7 @@ function CreateArea(props) {
               name="mode"
               id="food"
               value="food"
+              onChange={handleModeChange}
               required
             />
             <label className="form-check-label" htmlFor="food">
@@ -117,7 +133,7 @@ function CreateArea(props) {
         <div className = "contentarea">
           <textarea
             name="content"
-            placeholder={FOOD ? "Good food heals you, what did you eat?" : "Exercise calms you, what did you do?"}
+            placeholder={placeholder}
             rows="3"
             className="mt-3"
             style={{
@@ -145,7 +161,6 @@ function CreateArea(props) {
                   borderRadius: '5px',
                   fontSize: '16px', // Adjust the font size as needed
                 }}
-                required
               />
         </div>
         <div style={{ display: 'flex', alignItems: 'baseline' }}>
@@ -161,7 +176,6 @@ function CreateArea(props) {
                   borderRadius: '5px',
                   fontSize: '16px', // Adjust the font size as needed
                 }}
-                required
               />
         </div>
         <div style={{ display: 'flex', alignItems: 'baseline' }}>
@@ -177,7 +191,6 @@ function CreateArea(props) {
                   borderRadius: '5px',
                   fontSize: '16px', // Adjust the font size as needed
                 }}
-                required
               />
         </div>
         </div> 

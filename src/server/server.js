@@ -138,6 +138,8 @@ async function fetchData(id) {
         ),
       ]);
 
+      console.log(food_Result);
+
       const res = await organisebyDate(exercise_Result.rows, food_Result.rows);
 
       return res
