@@ -22,9 +22,21 @@ function CreateArea(props) {
     const date = event.target.elements.date.value;
     const mode = event.target.elements.mode.value;
     const content = event.target.elements.content.value;
+    var details; 
 
     if (dateValidity) {
       return;
+    }
+
+    if(FOOD){
+      const protein = event.target.elements.protein.value;
+      const calories = event.target.elements.calories.value;
+      const carbs = event.target.elements.carbs.value;
+      details = {protein : protein, calories : calories, carbs : carbs};
+    }
+    else{
+      const minutes = event.target.elements.minutes.value;
+      details = {minutes : minutes};
     }
 
     const [day, month, year] = date.split('/').map(String);
@@ -44,13 +56,11 @@ function CreateArea(props) {
         }
 
         console.log(temp);
-        note = {date : temp, mode, content};
+        note = {date : temp, mode, content, details};
     }
     else{
-      note = {date, mode, content };
+      note = {date, mode, content, details};
     }
-
-    console.log(note);
     // Create a note object from form values
 
     // Call the onAdd function with the note object
@@ -143,7 +153,7 @@ function CreateArea(props) {
               <input
                 type="text"
                 id="calories"
-                name="Calories"
+                name="calories"
                 placeholder="Enter calories Value"
                 className="mt-3"
                 style={{

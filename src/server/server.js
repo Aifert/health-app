@@ -87,15 +87,22 @@ async function organisebyDate(exercise_results,food_results){
     let currentEntry;
 
     exercise_results.forEach((result) => {
-        const {date, exercise_name} = result;
+        const {date, exercise_name, minutes} = result;
 
         if (!currentEntry || currentEntry.date !== date) {
             // Create a new entry if the date changes
-            currentEntry = { date, exercise_names: [], food_names : [] };
+            currentEntry = { date, exercise_names: [], food_names : []};
             organizedData.push(currentEntry);
             }
-        
-            currentEntry.exercise_names.push(exercise_name);
+
+            const exerciseEntry = currentEntry.exercise_names.find(entry => entry.exercise === exercise_name);
+
+            if(exerciseEntry){
+                exerciseEntry.minutes += minutes
+            }
+            else{
+                currentEntry.exercise_names.push({exercise : exercise_name, minutes : minutes})
+            }
     })
 
     food_results.forEach((result) => {
@@ -117,15 +124,16 @@ async function organisebyDate(exercise_results,food_results){
     return organizedData;
 }
 
+
 async function fetchData(id) {
     try {
       const [exercise_Result, food_Result] = await Promise.all([
         db.query(
-          "SELECT user_id, exercise_name, date FROM exercise WHERE user_id = $1 ORDER BY date",
+          "SELECT user_id, exercise_name, date, minutes FROM exercise WHERE user_id = $1 ORDER BY date",
           [id]
         ),
         db.query(
-          "SELECT user_id, food_name, date FROM food WHERE user_id = $1 ORDER BY date",
+          "SELECT user_id, food_name, date, protein, calories, carbs FROM food WHERE user_id = $1 ORDER BY date",
           [id]
         ),
       ]);
@@ -140,21 +148,34 @@ async function fetchData(id) {
   
 
 async function addNoteToDb(note){
-    const {userID, date, content, mode} = note
+    const {userID, date, content, mode, details} = note
 
-    if(userID !== "" && date !== "" && content !== "" && mode !== ""){
-        try {
-            const query = `INSERT INTO ${mode} (user_id, date, ${mode}_name) VALUES ($1, $2, $3)`;
-    
-            const result = await db.query(
-              query,
-              [userID, date, content]
-            );
+    if(userID !== "" && date !== "" && content !== "" && mode !== "" && details){
+        if(mode === "food"){
+            const {protein, calories, carbs} = details;
+            try{
+                const query = `INSERT INTO ${mode} (user_id, date, ${mode}_name, protein, calories, carbs) VALUES ($1, $2, $3, $4, $5, $6)`;
+
+                const result = await db.query(query, [userID, date, content, protein, calories, carbs])
             }
-        catch(error){
-            console.error("Error adding note", error.message);
+            catch(error){
+                console.error("Error adding note", error.message);
+            }
+            
+        }
+        else{
+            const {minutes} = details;
+            try{
+                const query = `INSERT INTO ${mode} (user_id, date, ${mode}_name, minutes) VALUES ($1, $2, $3, $4)`;
+
+                const result = await db.query(query, [userID, date, content, minutes])
+            }
+            catch(error){
+                console.error("Error adding note", error.message);
+            }
         }
     }
+
 }
 
 async function deletefromDB(id, date){
@@ -259,9 +280,9 @@ app.get("/getNote/:id", async (req, res) => {
 
 app.post("/addNote/:id", async (req, res) =>{
     const userID = parseInt(req.params.id);
-    const {date, content, mode } = req.body;
+    const {date, content, mode, details} = req.body;
 
-    const note = {userID, date, content, mode}
+    const note = {userID, date, content, mode, details}
 
     console.log("Adding note");
 

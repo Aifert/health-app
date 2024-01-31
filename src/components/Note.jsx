@@ -14,7 +14,11 @@ function Note(props) {
       </div>
       <ul> Exercise
       {props.exercise_names && props.exercise_names.map((nameItem) => {
-        return <li>{nameItem}</li>
+        return (
+          <div>
+          <li>{nameItem.exercise} {nameItem.minutes}</li>
+          </div>
+            )
       })}
       </ul>
       <hr />
