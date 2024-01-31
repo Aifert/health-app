@@ -72,6 +72,14 @@ function Health(props) {
 
   }
 
+  const handleLogout = () => {
+    // Perform any logout logic if needed
+
+    // Redirect to the home page
+    window.location.href = '/';
+  };
+
+
   useEffect(() => {
     // Load notes when the component mounts
     const loadNotes = async () => {
@@ -86,6 +94,9 @@ function Health(props) {
 
   return (
     <div style = {props.componentstyle}>
+      <button className="logout" onClick={handleLogout}>
+      Log Out
+      </button>
       <CreateArea onAdd={addNote}/>
       {notes.map((noteItem, index) => (
         <Note

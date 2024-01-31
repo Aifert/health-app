@@ -217,7 +217,6 @@ app.get("/wallpaper/:country", (req, res) => {
         .then(
             response => {
                 var number = Math.floor(Math.random() * 10)
-                console.log("Fetched");
                 const id = response.photos[number].id;
                 res.json({
                     photoID : id
@@ -276,8 +275,6 @@ app.post("/login", async (req, res) => {
 
 app.get("/getNote/:id", async (req, res) => {
     const userID = parseInt(req.params.id);
-
-    console.log("Getting note");
 
     const response = await fetchData(userID);
 

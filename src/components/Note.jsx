@@ -47,7 +47,7 @@ function Note(props) {
       <ul> 
       {props.food_names && props.food_names.map((nameItem) => (
           <div key={nameItem.food_name}>
-            <li style={{maxWidth : "50px"}}>{nameItem.food_name}</li>
+            <li style={{maxWidth : "150px"}}>{nameItem.food_name}</li>
           </div>
         ))}
       </ul>
