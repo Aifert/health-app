@@ -106,17 +106,30 @@ async function organisebyDate(exercise_results,food_results){
     })
 
     food_results.forEach((result) => {
-        const { date, food_name } = result;
+        const { date, food_name , protein, calories, carbs} = result;
+
+        var Protein = parseInt(protein);
+        var Calories = parseInt(calories);
+        var Carbs = parseInt(carbs);
     
         // Search for an existing entry with the same date
         const existingEntry = organizedData.find((entry) => entry.date === date);
     
         if (existingEntry) {
             // If an entry exists, append the food_name to the names array
-            existingEntry.food_names.push(food_name);
+            const foodEntry = existingEntry.food_names.find(entry => entry.food_name === food_name)
+
+            if(foodEntry){
+                foodEntry.protein += Protein;
+                foodEntry.calories += Calories;
+                foodEntry.carbs += Carbs;
+            }
+            else{
+                existingEntry.food_names.push({food_name: food_name, protein : Protein, calories : Calories, carbs : Carbs});
+            }
         } else {
             // If no entry exists, create a new entry
-            const newEntry = { date, exercise_names:[], food_names: [food_name] };
+            const newEntry = {date, exercise_names:[], food_names: [{food_name: food_name, protein : Protein, calories : Calories, carbs : Carbs}]};
             organizedData.push(newEntry);
         }
     });
@@ -137,8 +150,6 @@ async function fetchData(id) {
           [id]
         ),
       ]);
-
-      console.log(food_Result);
 
       const res = await organisebyDate(exercise_Result.rows, food_Result.rows);
 

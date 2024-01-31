@@ -94,10 +94,6 @@ function Health(props) {
           date={noteItem.date}
           exercise_names={noteItem.exercise_names}
           food_names={noteItem.food_names}
-          // protein={noteItem.protein}
-          // carbs={noteItem.carbs}
-          // calories={noteItem.calories}
-          // minutes={noteItem.minutes}
           onDelete={deleteNote}
         />
       ))}

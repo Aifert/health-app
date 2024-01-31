@@ -24,7 +24,16 @@ function Note(props) {
       <hr />
       <ul> Food
       {props.food_names && props.food_names.map((nameItem) => {
-        return <li>{nameItem}</li>
+        return (
+          <div>
+            <li>{nameItem.food_name}</li>
+            <ul>
+              <li>Protein : {nameItem.protein}</li>
+              <li>Calories : {nameItem.calories}</li>
+              <li>Carbs : {nameItem.carbs}</li>
+            </ul>
+          </div>
+        )
       })}
       </ul>
       <button onClick={handleClick}>DELETE</button>
