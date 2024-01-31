@@ -216,7 +216,7 @@ app.get("/wallpaper/:country", (req, res) => {
         })
         .then(
             response => {
-                var number = Math.floor(Math.random() * 10)
+                var number = Math.floor(Math.random() * 10);
                 const id = response.photos[number].id;
                 res.json({
                     photoID : id

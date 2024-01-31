@@ -39,8 +39,6 @@ function Home(props) {
         const newPhotoURL = `https://images.pexels.com/photos/${data.photoID}/pexels-photo-${data.photoID}.jpeg`;
         setPhotoURL(newPhotoURL);
         setError(false);
-
-        console.log(newPhotoURL); // This will log the updated state
       } catch (error) {
         setError(true);
         console.error("Error fetching photos", error);

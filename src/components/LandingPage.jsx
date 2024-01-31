@@ -9,8 +9,6 @@ function LandingPage(props){
         e.preventDefault();
 
         setcountryProvided(true);
-
-        console.log(country);
     }
     
     return (
