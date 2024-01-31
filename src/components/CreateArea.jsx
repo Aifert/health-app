@@ -149,7 +149,7 @@ function CreateArea(props) {
         {FOOD ? 
         <div>
         <div style={{ display: 'flex', alignItems: 'baseline' }}>
-              <label htmlFor="protein" style={{ marginRight: '5px', opacity : '80%' }}>Protein:</label>
+              <label htmlFor="protein" style={{ marginRight: '5px', color : '#77DD77'}}>Protein:</label>
               <input
                 type="text"
                 id="protein"
@@ -164,7 +164,7 @@ function CreateArea(props) {
               />
         </div>
         <div style={{ display: 'flex', alignItems: 'baseline' }}>
-              <label htmlFor="calories" style={{ marginRight: '5px', opacity : '80%' }}>Calories:</label>
+              <label htmlFor="calories" style={{ marginRight: '5px', color : '#FF964F'}}>Calories:</label>
               <input
                 type="text"
                 id="calories"
@@ -179,7 +179,7 @@ function CreateArea(props) {
               />
         </div>
         <div style={{ display: 'flex', alignItems: 'baseline' }}>
-              <label htmlFor="carbs" style={{ marginRight: '5px', opacity : '80%' }}>Carbs:</label>
+              <label htmlFor="carbs" style={{ marginRight: '5px',color : '#FF6961' }}>Carbs:</label>
               <input
                 type="text"
                 id="carbs"
