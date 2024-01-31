@@ -31,3 +31,58 @@
  * 
  * Want to add protein etc and a circle diagram 
  */
+
+
+/**
+ * import React from "react";
+
+function Note(props) {
+  function handleClick() {
+    props.onDelete(props.id, props.date);
+  }
+
+  const totalExerciseMinutes = props.exercise_names.reduce((total, item) => total + item.minutes, 0);
+  const percentage = (totalExerciseMinutes / 100) * 360; // Calculate percentage of 360 degrees
+
+  return (
+    <div className="note">
+      <div className="date-container">
+        <div className="date mb-3">
+          <h1>{props.date}</h1>
+        </div>
+      </div>
+      <div className="progress-wheel" style={{ background: `conic-gradient(#3498db ${percentage}deg, transparent ${percentage}deg 360deg)` }}></div>
+      <ul>
+        Exercise
+        {props.exercise_names && props.exercise_names.map((nameItem) => {
+          return (
+            <div key={nameItem.exercise}>
+              <li>{nameItem.exercise} {nameItem.minutes}</li>
+            </div>
+          )
+        })}
+      </ul>
+      <hr />
+      <ul>
+        Food
+        {props.food_names && props.food_names.map((nameItem) => {
+          return (
+            <div key={nameItem.food_name}>
+              <li>{nameItem.food_name}</li>
+              <ul>
+                <li>Protein: {nameItem.protein}</li>
+                <li>Calories: {nameItem.calories}</li>
+                <li>Carbs: {nameItem.carbs}</li>
+              </ul>
+            </div>
+          )
+        })}
+      </ul>
+      <button onClick={handleClick}>DELETE</button>
+    </div>
+  );
+}
+
+export default Note;
+
+ */
