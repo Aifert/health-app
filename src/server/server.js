@@ -313,6 +313,48 @@ app.post("/deleteNote/:id", async (req, res) => {
     await deletefromDB(userID, Date);
 })
 
+app.post("/duplicateNote/:id", async (req, res) => {
+    const userID = parseInt(req.params.id);
+    const {date, exercise_names, food_names} = req.body;
+
+    const today = new Date();
+    const options = { day: '2-digit', month: '2-digit', year: 'numeric' };
+    const newDate = today.toLocaleDateString('en-US', options);
+    
+    var start = "exercise";
+    var i = 0;
+
+    try {
+        const duplicatedItems = [...exercise_names, ...food_names];
+        for (let i = 0; i < duplicatedItems.length; i++) {
+          const item = duplicatedItems[i];
+          let start;
+          let details;
+      
+          if (i < exercise_names.length) {
+            start = "exercise";
+            details = { minutes: item.minutes };
+          } else {
+            start = "food";
+            details = { protein: item.protein, calories: item.calories, carbs: item.carbs };
+          }
+      
+          const response = await axios.post(`http://localhost:${port}/addNote/${userID}`, {
+            date: newDate,
+            content: start === "exercise" ? item.exercise : item.food_name,
+            mode: start,
+            details: details,
+          });
+        }
+
+        res.status(200).json({message : "duplicated successfully"});
+      } catch (error) {
+        console.log("Error duplicating note", error.message);
+        res.status(500).json({ message: "Failed to duplicate Note" });
+      }
+    
+})
+
 app.listen(port, () => {
     console.log(`Server successfully started on port ${port}`)
 })

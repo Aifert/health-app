@@ -60,16 +60,41 @@ function Health(props) {
         },
         body : JSON.stringify(req_body)
       });
-
-      console.log(deleteResponse);
     }
     catch(error){
       console.log("Error deleting note", error.message);
     }
 
+  }
 
+  async function duplicateNote(id){
 
+    const note = notes.find((noteItem,index) => {
+      return index === id;
+    })
 
+    try{
+      const duplicateResponse = await fetch(`${apiURL}/duplicateNote/${props.userID}`, {
+        method : "POST",
+        headers : {
+          "Content-Type" : "application/json",
+        },
+        body : JSON.stringify(note)
+      });
+
+      console.log(duplicateResponse);
+
+      if (duplicateResponse.ok) {
+        const updatedNotes = await getNote();
+        console.log(updatedNotes);
+        setNotes(updatedNotes);
+      } else {
+        console.log("Error duplicating note");
+      }
+    }
+    catch(error){
+      console.log("Error deleting note", error.message);
+    }
   }
 
   const handleLogout = () => {
@@ -106,6 +131,7 @@ function Health(props) {
           exercise_names={noteItem.exercise_names}
           food_names={noteItem.food_names}
           onDelete={deleteNote}
+          onDuplicate={duplicateNote}
         />
       ))}
     </div>

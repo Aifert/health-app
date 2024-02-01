@@ -9,6 +9,10 @@ function Note(props) {
     props.onDelete(props.id, props.date);
   }
 
+  function handleDuplicate(){
+    props.onDuplicate(props.id);
+  }
+
   const totalMinutes = exercise.reduce((total, item) => total + item.minutes, 0);
 
   const totalProtein = food.reduce((total, item) => total + item.protein, 0)
@@ -65,7 +69,8 @@ function Note(props) {
         </div>
       </div>
 
-      <button onClick={handleClick}>DELETE</button>
+      <button className = "notebutton" onClick={handleClick}>DELETE</button>
+      <button className = "notebutton" onClick={handleDuplicate}>DUPLICATE</button>
     </div>
   );
 }
