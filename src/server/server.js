@@ -318,9 +318,9 @@ app.post("/duplicateNote/:id", async (req, res) => {
     const {date, exercise_names, food_names} = req.body;
 
     const today = new Date();
-    const options = { day: '2-digit', month: '2-digit', year: 'numeric' };
-    const newDate = today.toLocaleDateString('en-US', options);
-    
+    const options = { day: '2-digit', month: '2-digit' , year: 'numeric' };
+    const newDate = today.toLocaleDateString('en-GB', options);
+
     var start = "exercise";
     var i = 0;
 
