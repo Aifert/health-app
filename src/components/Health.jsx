@@ -118,7 +118,7 @@ function Health(props) {
   
 
   return (
-    <div style = {props.componentstyle}>
+    <div style = {{backgroundColor : "#ebe3d5"}}>
       <button className="logout" onClick={handleLogout}>
       Log Out
       </button>
