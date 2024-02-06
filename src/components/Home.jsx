@@ -11,6 +11,7 @@ function Home(props) {
   const [error, setError] = useState(false);
   const [LoginSuccess, updateLoginSuccess] = useState(false);
   const [user_id, setUserID] = useState();
+  const [username, setUsername] = useState("");
 
   function handleonClick(click) {
     if(click !== action){
@@ -21,12 +22,11 @@ function Home(props) {
 
   function handleRegistrationSuccess(){
     updateisClicked(true);
-
-    console.log(isClicked);
   }
 
-  function handleLoginSuccess(id){
+  function handleLoginSuccess(id, username){
     setUserID(id);
+    setUsername(username);
     updateLoginSuccess(true);
   }
 
@@ -63,6 +63,7 @@ function Home(props) {
         LoginSuccess ?
         <Health 
           userID = {user_id}
+          username = {username}
           componentstyle = {componentStyle}
         />
         :

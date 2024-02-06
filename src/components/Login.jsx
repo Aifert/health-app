@@ -30,9 +30,9 @@ function Login(props){
             if(response.ok){
                 const responseData = await response.json();
                 const userID = responseData.userID;
+                const username = responseData.username;
                 console.log("Login Successfully");
-                console.log(userID);
-                props.loginSuccess(userID);
+                props.loginSuccess(userID, username);
             }
             else{
                 const errorData = await response.json();

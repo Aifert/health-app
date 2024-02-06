@@ -122,6 +122,9 @@ function Health(props) {
       <button className="logout" onClick={handleLogout}>
       Log Out
       </button>
+      <div className = "welcome">
+        <h3>{`Welcome ${props.username}`}</h3>
+      </div>
       <CreateArea onAdd={addNote}/>
       {notes.map((noteItem, index) => (
         <Note

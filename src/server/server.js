@@ -57,14 +57,15 @@ async function registerClient(firstname, lastname, gender, emailAddress, passwor
 
 async function checkClient(emailAddress, pw){
     try{
-        const result = await db.query("SELECT id, password FROM credentials WHERE emailaddress = $1" , [emailAddress]);
+        const result = await db.query("SELECT first_name, last_name, id, password FROM credentials WHERE emailaddress = $1" , [emailAddress]);
 
         if(result.rowCount !== 0){
-            const {id, password} = result.rows[0];
+            const {first_name, last_name ,id, password} = result.rows[0];
 
             if(bcrypt.compareSync(pw, password)){
                 user_id = id;
-                return {valid : true , message : "Login Successful"}
+                var username = `${first_name} ${last_name}`
+                return {valid : true , message : "Login Successful", username : username};
             }
             else{
                 return {valid : false, message : "Wrong email or password, please try again"}
@@ -265,7 +266,7 @@ app.post("/login", async (req, res) => {
     const result = await checkClient(email, password);
 
     if(result.valid){
-        res.status(200).json({message : "Login Successful", userID : user_id})
+        res.status(200).json({message : "Login Successful", userID : user_id, username : result.username})
     }
     else{
         console.log("Wrong credentials");
