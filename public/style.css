@@ -38,9 +38,9 @@
     background-color : #EBE3D5;
 }
 
-.homepage{
+/* .homepage{
   transform : scale(0.6);
-}
+} */
 
 .selectionbuttons{
     display : flex;
@@ -180,9 +180,9 @@ h4{
     justify-content: center;
   }
 
-  .note, .create{
+  /* .note, .create{
     transform : scale(0.8);
-  }
+  } */
 
   html{
     margin : 0;
