@@ -1,5 +1,7 @@
 import React, {useState, useEffect} from "react";
 
+const apiURL = "https://health-app-jqdy.onrender.com"
+
 function Login(props){
 
     const [failed, updatefailed] = useState(false);
@@ -18,7 +20,7 @@ function Login(props){
         };
 
         try{
-            const response = await fetch("http://localhost:4000/login", {
+            const response = await fetch(`${apiURL}/login`, {
                 method : "POST",
                 headers: {
                     "Content-Type": "application/json",
