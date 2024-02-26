@@ -9,7 +9,7 @@ import bcrypt from "bcrypt";
 import { Sequelize, DataTypes } from 'sequelize';
 
 const app = express();
-const PORT = process.env.PORT || 3001;
+const port = process.env.PORT || 3001;
 const saltRounds = 10;
 
 app.use(cors());
