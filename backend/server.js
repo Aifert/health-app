@@ -6,7 +6,6 @@ import {createClient} from "pexels";
 import pg from "pg";
 import bodyParser from "body-parser"
 import bcrypt from "bcrypt";
-import { Sequelize, DataTypes } from 'sequelize';
 
 const app = express();
 const port = process.env.PORT || 3001;
@@ -17,37 +16,21 @@ app.use(bodyParser.json())
 
 var user_id;
 
-// let db;
+let db;
 
-// if (process.env.DB_URL) {
-//   db = new Sequelize(process.env.DB_URL);
-// } else {
-//   db = new Sequelize(
-//     process.env.DB_NAME,
-//     process.env.DB_USER,
-//     process.env.DB_PW,
-//     {
-//       host: 'localhost',
-//       dialect: 'postgres',
-//     },
-//   );
-// }
-
-const db = new pg.Client({
-    user: process.env.DBUSER,
-    host: process.env.DBHOST,
-    database: process.env.DBNAME,
-    password: process.env.DBPW,
-    port: process.env.DBPORT,
-  });
-
-  db.connect()
-  .then(() => {
-    console.log('Connected to the database');
-  })
-  .catch(error => {
-    console.error('Error connecting to the database:', error);
-  });
+if (process.env.DB_URL) {
+  db = new Sequelize(process.env.DB_URL);
+} else {
+  db = new Sequelize(
+    process.env.DB_NAME,
+    process.env.DB_USER,
+    process.env.DB_PW,
+    {
+      host: 'localhost',
+      dialect: 'postgres',
+    },
+  );
+}
 
 const client = createClient(process.env.APIKEY);
 
