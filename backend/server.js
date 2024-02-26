@@ -366,6 +366,10 @@ app.post("/duplicateNote/:id", async (req, res) => {
     
 })
 
+app.get("/ping", async (req, res) => {
+    res.json({message : "pingpong"});
+})
+
 app.listen(port, () => {
     console.log(`Server successfully started on port ${port}`)
 })
