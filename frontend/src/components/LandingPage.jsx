@@ -23,7 +23,7 @@ function LandingPage(props){
   
           const responseData = await response.json();
 
-          console.log(responseData);
+          console.log(responseData.message);
         } catch (error) {
           console.error('Error fetching data:', error);
         }
