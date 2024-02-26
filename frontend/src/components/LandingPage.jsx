@@ -75,11 +75,11 @@ function LandingPage(props){
                         <div className = "title mb-2">
                         <h5>Generate a random country</h5>
                         </div>
-                        <div className = "generate mb-3">
+                        <div className = "generate mb-5">
                           <button className = "generateButton" onClick={handleGenerate}>Generate</button>
                         </div>
                       </div>
-                      <div className = "title m-2">
+                      <div className = "title mb-5">
                         <h6>OR</h6>
                       </div>
                       <div className = "label mb-3">
