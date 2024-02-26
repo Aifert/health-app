@@ -8,7 +8,7 @@ import bodyParser from "body-parser"
 import bcrypt from "bcrypt";
 
 const app = express();
-const PORT = process.env.PORT || 3001;
+const port = process.env.PORT || 3001;
 const saltRounds = 10;
 
 app.use(cors());
