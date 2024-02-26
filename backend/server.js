@@ -6,9 +6,10 @@ import {createClient} from "pexels";
 import pg from "pg";
 import bodyParser from "body-parser"
 import bcrypt from "bcrypt";
+import { Sequelize, DataTypes } from 'sequelize';
 
 const app = express();
-const port = 4000;
+const PORT = process.env.PORT || 3001;
 const saltRounds = 10;
 
 app.use(cors());
@@ -16,14 +17,21 @@ app.use(bodyParser.json())
 
 var user_id;
 
-const db = new pg.Client({
-    user : "postgres",
-    host : "localhost",
-    database : "health-app",
-    password : process.env.DBPW,
-    port : process.env.DBPORT,
-});
-db.connect();
+let db;
+
+if (process.env.DB_URL) {
+  db = new Sequelize(process.env.DB_URL);
+} else {
+  db = new Sequelize(
+    process.env.DB_NAME,
+    process.env.DB_USER,
+    process.env.DB_PW,
+    {
+      host: 'localhost',
+      dialect: 'postgres',
+    },
+  );
+}
 
 const client = createClient(process.env.APIKEY);
 
