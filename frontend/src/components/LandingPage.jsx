@@ -1,5 +1,7 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import Home from "./Home.jsx"
+
+const apiURL = "https://health-app-jqdy.onrender.com"
 
 function LandingPage(props){
     const [country, setCountry] = useState("");
@@ -10,6 +12,28 @@ function LandingPage(props){
 
         setcountryProvided(true);
     }
+
+    useEffect(() => {
+      const fetchData = async () => {
+        try {
+          const response = await fetch(`${apiURL}/ping`);
+          if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+          }
+  
+          const responseData = await response.json();
+
+          console.log(responseData);
+        } catch (error) {
+          console.error('Error fetching data:', error);
+        }
+      };
+  
+      const intervalId = setInterval(() => {
+        fetchData();
+      }, 1000); // 1000 milliseconds = 1 second
+  
+    }, []);
     
     return (
       !countryProvided ? 
