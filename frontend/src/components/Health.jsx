@@ -2,7 +2,7 @@ import React, {useState, useEffect} from "react";
 import Note from "./Note";
 import CreateArea from "./CreateArea";
 
-const apiURL = "http://localhost:4000"
+const apiURL = "https://health-app-jqdy.onrender.com"
 
 function Health(props) {
   const [notes, setNotes] = useState([]);

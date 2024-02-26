@@ -4,6 +4,8 @@ import Login from "./Login";
 import LandingPage from "./LandingPage"
 import Health from "./Health"
 
+const apiURL = "https://health-app-jqdy.onrender.com"
+
 function Home(props) {
   const [isClicked, updateisClicked] = useState(true);
   const [action, setAction] = useState("login");
@@ -33,7 +35,7 @@ function Home(props) {
   async function fetchData() {
     if(photoURL === "LMAO"){
       try {
-        const response = await fetch(`http://localhost:4000/wallpaper/${props.Country}`);
+        const response = await fetch(`${apiURL}/wallpaper/${props.Country}`);
         const data = await response.json();
 
         const newPhotoURL = `https://images.pexels.com/photos/${data.photoID}/pexels-photo-${data.photoID}.jpeg`;

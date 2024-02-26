@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from "react";
 
+const apiURL = "https://health-app-jqdy.onrender.com"
 
 function Register(props){
 
@@ -23,7 +24,7 @@ function Register(props){
         };
 
         try{
-            const response = await fetch("http://localhost:4000/register", {
+            const response = await fetch(`${apiURL}/register`, {
                 method : "POST",
                 headers: {
                     "Content-Type": "application/json",
