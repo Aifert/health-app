@@ -7,11 +7,32 @@ function LandingPage(props){
     const [country, setCountry] = useState("");
     const [countryProvided, setcountryProvided] = useState(false);
 
+    const countries = ["Singapore", "Malaysia", "Australia", "Russia", "India", "New Zealand"];
+
     function handleonSubmit(e){
         e.preventDefault();
 
         setcountryProvided(true);
     }
+
+    async function handleGenerate() {
+
+      const randomIndex = Math.floor(Math.random() * countries.length);
+    
+
+      const randomCountry = countries[randomIndex];
+
+      setCountry(randomCountry);
+      
+      setcountryProvided(true);
+
+      document.getElementById("country").value = randomCountry;
+    
+
+      document.getElementById("landing-button").click();
+
+    }
+    
 
     useEffect(() => {
       const fetchData = async () => {
@@ -34,29 +55,42 @@ function LandingPage(props){
       }, 1000); // 1000 milliseconds = 1 second
   
     }, []);
-    
+
     return (
       !countryProvided ? 
         <div id="landing-page">
         <section className="vh-100 gradient-custom">
           <div className="container py-5 h-100">
             <div className="row justify-content-center align-items-center h-100">
-              <div className="col-12 col-lg-9 col-xl-7">
+              <div className="cardcontainer col-12 col-lg-9 col-xl-7">
                 <div className="card shadow-2-strong card-registration" style={{ borderRadius: '15px' }}>
                   <div className="card-body p-4 p-md-5">
                     <div class = "selectionbuttons">
                     <form onSubmit={handleonSubmit}>
                       <div className = "label">
-                        <label htmlFor="country">Welcome to my fitness app</label>
+                        <h3><label htmlFor="country">Welcome to my fitness app</label></h3>
                       </div>
                       <br />
-                      <div className = "label">
-                        <label htmlFor="country">Where is your favourite Country?</label>
+                      <div className = "random">
+                        <div className = "title mb-2">
+                        <h5>Generate a random country</h5>
+                        </div>
+                        <div className = "generate mb-3">
+                          <button className = "generateButton" onClick={handleGenerate}>Generate</button>
+                        </div>
+                      </div>
+                      <div className = "title m-2">
+                        <h6>OR</h6>
+                      </div>
+                      <div className = "label mb-3">
+                      <h5>
+                      <label htmlFor="country">Input your favourite Country</label>
+                      </h5>
                       </div>
                         <input
                             type="text"
                             id="country"
-                            className="form-control form-control-lg mb-5 mt-5"
+                            className="form-control form-control-lg mb-5 mt-4"
                             value={country}
                             placeholder = {props.Error ? "Please Try Again" : ""}
                             onChange={(e) => setCountry(e.target.value)}

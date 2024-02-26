@@ -126,6 +126,8 @@ function Health(props) {
         <h3>{`Welcome ${props.username}`}</h3>
       </div>
       <CreateArea onAdd={addNote}/>
+      <div className = "center">
+      <div className = "notewrapper">
       {notes.map((noteItem, index) => (
         <Note
           key={index}
@@ -137,6 +139,8 @@ function Health(props) {
           onDuplicate={duplicateNote}
         />
       ))}
+      </div>
+      </div>
     </div>
   );
 }

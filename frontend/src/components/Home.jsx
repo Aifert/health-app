@@ -74,7 +74,7 @@ function Home(props) {
         <section className="background vh-100 gradient-custom" style = {componentStyle}>
           <div className="container py-5 h-100 homepage">
             <div className="row justify-content-center align-items-center h-100">
-              <div className="col-12 col-lg-9 col-xl-7">
+              <div className="cardcontainer col-12 col-lg-9 col-xl-7">
                 <div className="card shadow-2-strong card-registration" style={{ borderRadius: '15px' }}>
                   <div className="card-body p-4 p-md-5">
                   <div className="row">
@@ -87,6 +87,11 @@ function Home(props) {
                     <div className="form-outline selectionbuttons">
                     <button onClick = {() => handleonClick("register")} className = "login-register p-3">Register</button>
                     </div>
+                </div>
+                <div className = "guest">
+                  <div className = "guestcontent">
+                  Try Guest mode using the credentials : guest@gmail.com guest123
+                  </div>
                 </div>
                 </div>
                     <hr />

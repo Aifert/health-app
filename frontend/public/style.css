@@ -201,3 +201,58 @@ h4{
     justify-content: center;
   
   }
+
+  .guest{
+    display : flex;
+    justify-content: center;
+  }
+
+  .guestcontent {
+    text-align : center;
+  }
+
+  .title, .generate{
+    display : flex;
+    justify-content: center;
+  }
+
+  .generateButton{
+    border : none;
+    padding : 10px;
+    border-radius : 8px;
+  }
+
+
+  @media (max-width : 430px){
+    *, input{
+      font-size : 0.8rem !important;
+    }
+
+  .card{
+        width : 70%;
+      }
+
+    .cardcontainer{
+      display : flex;
+      justify-content: center;
+    }
+
+    .createarea{
+      width : 70%;
+    }
+
+    .notewrapper{
+      display : flex;
+      flex-direction : column;
+    }
+
+    .center{
+      display : flex;
+      justify-content: center;
+    }
+
+    .note{
+      height : 70%;
+      margin : 30px;
+    }
+  }
