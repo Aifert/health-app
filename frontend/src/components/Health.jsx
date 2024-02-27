@@ -86,7 +86,6 @@ function Health(props) {
 
       if (duplicateResponse.ok) {
         const updatedNotes = await getNote();
-        console.log(updatedNotes);
         setNotes(updatedNotes);
       } else {
         console.log("Error duplicating note");
@@ -104,12 +103,18 @@ function Health(props) {
     window.location.href = '/';
   };
 
+  const convertDate = (dateString) => {
+    const [day, month, year] = dateString.split('/');
+    return new Date(`${year}-${month}-${day}`);
+  };
 
   useEffect(() => {
     // Load notes when the component mounts
     const loadNotes = async () => {
       const result = await getNote();
-      setNotes(result);
+
+      const sortedData = result.sort((a, b) => convertDate(a.date) - convertDate(b.date));
+      setNotes(sortedData);
     };
 
     loadNotes();
