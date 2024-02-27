@@ -90,7 +90,7 @@ function LandingPage(props){
                         <input
                             type="text"
                             id="country"
-                            className="form-control form-control-lg mb-5 mt-4"
+                            className="form-control form-control-lg mb-3 "
                             value={country}
                             placeholder = {props.Error ? "Please Try Again" : ""}
                             onChange={(e) => setCountry(e.target.value)}
