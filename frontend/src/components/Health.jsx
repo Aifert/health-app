@@ -6,6 +6,7 @@ const apiURL = "https://health-app-jqdy.onrender.com"
 
 function Health(props) {
   const [notes, setNotes] = useState([]);
+  const [order, updateOrder] = useState("most");
 
   async function getNote() {
     try {
@@ -108,17 +109,29 @@ function Health(props) {
     return new Date(`${year}-${month}-${day}`);
   };
 
+  async function sort(result, order) {
+    const sortedResult = [...result];
+    if (order === "most") {
+      sortedResult.sort((a, b) => convertDate(b.date) - convertDate(a.date));
+    } else if (order === "least") {
+      sortedResult.sort((a, b) => convertDate(a.date) - convertDate(b.date));
+    }
+  
+    return sortedResult;
+  }
+
   useEffect(() => {
     // Load notes when the component mounts
     const loadNotes = async () => {
       const result = await getNote();
 
-      const sortedData = result.sort((a, b) => convertDate(a.date) - convertDate(b.date));
+      const sortedData = await sort(result, order);
+
       setNotes(sortedData);
     };
 
     loadNotes();
-  }, [props.userID]); // Trigger the effect when props.userID changes
+  }, [props.userID, order]); // Trigger the effect when props.userID changes
 
   
 
@@ -131,6 +144,10 @@ function Health(props) {
         <h3>{`Welcome ${props.username}`}</h3>
       </div>
       <CreateArea onAdd={addNote}/>
+      <div>
+        <button onClick = {() => updateOrder("most")} style={order === "most" ? { opacity: "70%" } : { opacity: "100%" }} className = "sort-button">Sort by most recent</button>
+        <button onClick = {() => updateOrder("least")} style={order === "least" ? { opacity: "70%" } : { opacity: "100%" }} className = "sort-button">Sort by least recent</button>
+      </div>
       <div className = "center">
       <div className = "notewrapper">
       {notes.map((noteItem, index) => (

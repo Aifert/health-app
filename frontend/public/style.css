@@ -230,6 +230,14 @@ h4{
     gap: 50px;
 }
 
+.sort-button{
+  border : none;
+  background-color: #f9cf70;
+  margin : 20px;
+  padding : 10px;
+  border-radius: 50px;
+}
+
   @media (max-width : 430px){
     *, input{
       font-size : 0.8rem !important;
