@@ -144,7 +144,7 @@ function Health(props) {
         <h3>{`Welcome ${props.username}`}</h3>
       </div>
       <CreateArea onAdd={addNote}/>
-      <div>
+      <div className = "sort">
         <button onClick = {() => updateOrder("most")} style={order === "most" ? { opacity: "70%" } : { opacity: "100%" }} className = "sort-button">Sort by most recent</button>
         <button onClick = {() => updateOrder("least")} style={order === "least" ? { opacity: "70%" } : { opacity: "100%" }} className = "sort-button">Sort by least recent</button>
       </div>

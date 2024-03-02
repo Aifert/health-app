@@ -270,4 +270,13 @@ h4{
       height : 70%;
       margin : 30px;
     }
+
+    .sort-button{
+      margin : 10px;
+    }
+
+    .sort{
+      display : flex;
+      justify-content: center;
+    }
   }
