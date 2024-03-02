@@ -145,8 +145,8 @@ function Health(props) {
       </div>
       <CreateArea onAdd={addNote}/>
       <div className = "sort">
-        <button onClick = {() => updateOrder("most")} style={order === "most" ? { opacity: "70%" } : { opacity: "100%" }} className = "sort-button">Sort by most recent</button>
-        <button onClick = {() => updateOrder("least")} style={order === "least" ? { opacity: "70%" } : { opacity: "100%" }} className = "sort-button">Sort by least recent</button>
+        <button onClick = {() => updateOrder("most")} style={order === "most" ? { opacity: "60%" } : { opacity: "100%" }} className = "sort-button">Sort by most recent</button>
+        <button onClick = {() => updateOrder("least")} style={order === "least" ? { opacity: "60%" } : { opacity: "100%" }} className = "sort-button">Sort by least recent</button>
       </div>
       <div className = "center">
       <div className = "notewrapper">

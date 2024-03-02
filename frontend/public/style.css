@@ -241,6 +241,7 @@ h4{
   @media (max-width : 430px){
     *, input{
       font-size : 0.8rem !important;
+      text-decoration: none;
     }
 
   .card{
@@ -278,5 +279,9 @@ h4{
     .sort{
       display : flex;
       justify-content: center;
+    }
+
+    .generateButton, #landing-button, .login-register, .logout, .sort-button{
+      color : black;
     }
   }
